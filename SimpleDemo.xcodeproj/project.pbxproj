@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD3981311D1AD794001A041D /* KMCGeigerCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3981301D1AD794001A041D /* KMCGeigerCounter.m */; };
 		FD3DBE171D1A8663003F1184 /* XLItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3DBE161D1A8663003F1184 /* XLItem.m */; };
 		FD3DBE1A1D1A8AEF003F1184 /* XLLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3DBE191D1A8AEF003F1184 /* XLLayout.m */; };
 		FD3DBE1E1D1A8D53003F1184 /* UIView+XLAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3DBE1D1D1A8D53003F1184 /* UIView+XLAdd.m */; };
@@ -49,6 +50,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FD39812F1D1AD794001A041D /* KMCGeigerCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMCGeigerCounter.h; sourceTree = "<group>"; };
+		FD3981301D1AD794001A041D /* KMCGeigerCounter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMCGeigerCounter.m; sourceTree = "<group>"; };
 		FD3DBE151D1A8663003F1184 /* XLItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLItem.h; sourceTree = "<group>"; };
 		FD3DBE161D1A8663003F1184 /* XLItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLItem.m; sourceTree = "<group>"; };
 		FD3DBE181D1A8AEF003F1184 /* XLLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLLayout.h; sourceTree = "<group>"; };
@@ -131,6 +134,8 @@
 		FD3DBE1B1D1A8D35003F1184 /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
+				FD39812F1D1AD794001A041D /* KMCGeigerCounter.h */,
+				FD3981301D1AD794001A041D /* KMCGeigerCounter.m */,
 				FD3DBE1C1D1A8D53003F1184 /* UIView+XLAdd.h */,
 				FD3DBE1D1D1A8D53003F1184 /* UIView+XLAdd.m */,
 				FD7E64131D1ABCA100DD054A /* NSAttributedString+XLAdd.h */,
@@ -374,6 +379,7 @@
 				FD5E119F1D124A8200F04834 /* main.m in Sources */,
 				FD5E11D21D124AF800F04834 /* XLBaseViewController.m in Sources */,
 				FD3DBE1E1D1A8D53003F1184 /* UIView+XLAdd.m in Sources */,
+				FD3981311D1AD794001A041D /* KMCGeigerCounter.m in Sources */,
 				FD5E11E01D12521500F04834 /* XLMyCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

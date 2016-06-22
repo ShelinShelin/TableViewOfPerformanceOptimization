@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "XLExampleList.h"
 #import "YYFPSLabel.h"
+#import "KMCGeigerCounter.h"
 
 @interface AppDelegate ()
 
@@ -28,9 +29,11 @@
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     self.window.rootViewController = nav;
     
-    YYFPSLabel *fps = [[YYFPSLabel alloc] initWithFrame:CGRectMake(10, [UIScreen mainScreen].bounds.size.height - 40, 60, 30)];
+    [KMCGeigerCounter sharedGeigerCounter].enabled = YES;
     
-    [self.window addSubview:fps];
+//    YYFPSLabel *fps = [[YYFPSLabel alloc] initWithFrame:CGRectMake(10, [UIScreen mainScreen].bounds.size.height - 40, 60, 30)];
+//    
+//    [self.window addSubview:fps];
     return YES;
 }
 
