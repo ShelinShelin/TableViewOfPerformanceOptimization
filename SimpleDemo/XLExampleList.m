@@ -28,7 +28,7 @@
     
     [self.view addSubview:self.tableView];
     
-    [self addCellItemWithTitle:@"1" className:@"XLFeedListViewController"];
+    [self addCellItemWithTitle:@"Feed List" className:@"XLFeedListViewController"];
     
 }
 

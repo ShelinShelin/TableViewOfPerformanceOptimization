@@ -9,10 +9,12 @@
 #import "XLFeedListViewController.h"
 #import "XLTableView.h"
 #import "XLMyCell.h"
+#import "XLItem.h"
 
 @interface XLFeedListViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) XLTableView *tableView;
+@property (nonatomic, copy) NSMutableArray *dataArray;
 
 @end
 
@@ -22,6 +24,27 @@
     [super viewDidLoad];
     
     [self.view addSubview:self.tableView];
+    
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        for (int i = 0; i < 5; i ++) {
+            NSString *path = [[NSBundle mainBundle] pathForResource:@"feedlist" ofType:@"json"];
+            NSData *data = [NSData dataWithContentsOfFile:path];
+            
+            NSDictionary *feedListDict  = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+            NSArray *feedlist = feedListDict[@"feedlist"];
+            NSMutableArray *tempArray = [NSMutableArray arrayWithCapacity:10];
+            for (NSDictionary *itemDict in feedlist) {
+                [tempArray addObject:[XLItem itemWithDict:itemDict]];
+            }
+            [self.dataArray addObjectsFromArray:tempArray];
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    });
 }
 
 
@@ -40,15 +63,23 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 300;
+    return self.dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     XLMyCell *cell = [XLMyCell myCellWithTableView:tableView];
-    cell.label.attributedText = [[NSAttributedString alloc] initWithString:@"Async Display Test ✺◟(∗❛ัᴗ❛ั∗)◞✺ ✺◟(∗❛ัᴗ❛ั∗)◞✺ 😀😖😐😣😡🚖🚌🚋🎊💖💗💛💙🏨🏦🏫 Async Display Test ✺◟(∗❛ัᴗ❛ั∗)◞✺ ✺◟(∗❛ัᴗ❛ั∗)◞✺ 😀😖😐😣😡🚖🚌🚋🎊💖💗💛💙🏨🏦🏫 Async Display Test ✺◟(∗❛ัᴗ❛ั∗)◞✺ ✺◟(∗❛ัᴗ❛ั∗)◞✺ 😀😖😐😣😡🚖🚌🚋🎊💖💗💛💙🏨🏦🏫 "];
     
     return cell;
+}
+
+#pragma mark - lazy loading
+
+- (NSMutableArray *)dataArray {
+    if (!_dataArray) {
+        _dataArray = @[].mutableCopy;
+    }
+    return _dataArray;
 }
 
 @end

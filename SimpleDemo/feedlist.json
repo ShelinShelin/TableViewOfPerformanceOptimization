@@ -1,0 +1,104 @@
+{
+	"feedlist" : [
+		{
+			"status" : "1XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+			"images" : [
+				 "bg_image.jpg",
+				 "bg_image.jpg",
+		     "bg_image.jpg",
+			],
+			"iconName" : "shelin.jpg",
+			"userName" : "GGGGGG",
+		},
+		{
+			"status" : "2XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+			"images" : [
+				 "bg_image.jpg",
+				 "bg_image.jpg",
+		     "bg_image.jpg",
+			],
+			"iconName" : "shelin.jpg",
+			"userName" : "GGGGGG",
+		},
+    {
+			"status" : "3XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+			"images" : [
+				 "bg_image.jpg",
+				 "bg_image.jpg",
+		     "bg_image.jpg",
+			],
+			"iconName" : "shelin.jpg",
+			"userName" : "GGGGGG",
+		},
+    {
+			"status" : "4XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+			"images" : [
+				 "bg_image.jpg",
+				 "bg_image.jpg",
+		     "bg_image.jpg",
+			],
+			"iconName" : "shelin.jpg",
+			"userName" : "GGGGGG",
+		},
+    {
+			"status" : "5XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+			"images" : [
+				 "bg_image.jpg",
+				 "bg_image.jpg",
+		     "bg_image.jpg",
+			],
+			"iconName" : "shelin.jpg",
+			"userName" : "GGGGGG",
+		},
+    {
+			"status" : "6XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+			"images" : [
+				 "bg_image.jpg",
+				 "bg_image.jpg",
+		     "bg_image.jpg",
+			],
+			"iconName" : "shelin.jpg",
+			"userName" : "GGGGGG",
+		},
+    {
+			"status" : "7XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+			"images" : [
+				 "bg_image.jpg",
+				 "bg_image.jpg",
+		     "bg_image.jpg",
+			],
+			"iconName" : "shelin.jpg",
+			"userName" : "GGGGGG",
+		},
+    {
+			"status" : "8XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+			"images" : [
+				 "bg_image.jpg",
+				 "bg_image.jpg",
+		     "bg_image.jpg",
+			],
+			"iconName" : "shelin.jpg",
+			"userName" : "GGGGGG",
+		},
+    {
+			"status" : "9XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+			"images" : [
+				 "bg_image.jpg",
+				 "bg_image.jpg",
+		     "bg_image.jpg",
+			],
+			"iconName" : "shelin.jpg",
+			"userName" : "GGGGGG",
+		},
+    {
+			"status" : "10XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+			"images" : [
+				 "bg_image.jpg",
+				 "bg_image.jpg",
+		     "bg_image.jpg",
+			],
+			"iconName" : "shelin.jpg",
+			"userName" : "GGGGGG",
+		},		
+	]
+}

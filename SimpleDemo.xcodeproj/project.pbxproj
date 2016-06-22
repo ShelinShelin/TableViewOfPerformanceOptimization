@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD3DBE131D1A856B003F1184 /* feedlist.json in Resources */ = {isa = PBXBuildFile; fileRef = FD3DBE121D1A856B003F1184 /* feedlist.json */; };
+		FD3DBE171D1A8663003F1184 /* XLItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3DBE161D1A8663003F1184 /* XLItem.m */; };
 		FD5E119F1D124A8200F04834 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5E119E1D124A8200F04834 /* main.m */; };
 		FD5E11A21D124A8200F04834 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5E11A11D124A8200F04834 /* AppDelegate.m */; };
 		FD5E11A51D124A8200F04834 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5E11A41D124A8200F04834 /* ViewController.m */; };
@@ -42,6 +44,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FD3DBE121D1A856B003F1184 /* feedlist.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = feedlist.json; sourceTree = "<group>"; };
+		FD3DBE151D1A8663003F1184 /* XLItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLItem.h; sourceTree = "<group>"; };
+		FD3DBE161D1A8663003F1184 /* XLItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLItem.m; sourceTree = "<group>"; };
 		FD5E119A1D124A8200F04834 /* SimpleDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD5E119E1D124A8200F04834 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FD5E11A01D124A8200F04834 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -98,6 +103,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FD3DBE141D1A8627003F1184 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FD3DBE151D1A8663003F1184 /* XLItem.h */,
+				FD3DBE161D1A8663003F1184 /* XLItem.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		FD5E11911D124A8200F04834 = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +135,7 @@
 		FD5E119C1D124A8200F04834 /* SimpleDemo */ = {
 			isa = PBXGroup;
 			children = (
+				FD3DBE141D1A8627003F1184 /* Model */,
 				FD5E11A01D124A8200F04834 /* AppDelegate.h */,
 				FD5E11A11D124A8200F04834 /* AppDelegate.m */,
 				FD5E11D61D124C5D00F04834 /* XLTableView.h */,
@@ -141,6 +156,7 @@
 		FD5E119D1D124A8200F04834 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				FD3DBE121D1A856B003F1184 /* feedlist.json */,
 				FD5E11E81D1256AF00F04834 /* YYFPSLabel.h */,
 				FD5E11E91D1256AF00F04834 /* YYFPSLabel.m */,
 				FD5E11E31D1254DE00F04834 /* bg_image.jpg */,
@@ -276,6 +292,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD3DBE131D1A856B003F1184 /* feedlist.json in Resources */,
 				FD5E11AD1D124A8200F04834 /* LaunchScreen.storyboard in Resources */,
 				FD5E11AA1D124A8200F04834 /* Assets.xcassets in Resources */,
 				FD5E11E41D1254DE00F04834 /* bg_image.jpg in Resources */,
@@ -308,6 +325,7 @@
 				FD5E11A51D124A8200F04834 /* ViewController.m in Sources */,
 				FD5E11DB1D124FF200F04834 /* XLFeedListViewController.m in Sources */,
 				FD5E11D51D124B2D00F04834 /* XLExampleList.m in Sources */,
+				FD3DBE171D1A8663003F1184 /* XLItem.m in Sources */,
 				FD5E11A21D124A8200F04834 /* AppDelegate.m in Sources */,
 				FD5E11D81D124C5D00F04834 /* XLTableView.m in Sources */,
 				FD5E119F1D124A8200F04834 /* main.m in Sources */,
@@ -536,6 +554,7 @@
 				FD5E11C91D124A8200F04834 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FD5E11CA1D124A8200F04834 /* Build configuration list for PBXNativeTarget "SimpleDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -544,6 +563,7 @@
 				FD5E11CC1D124A8200F04834 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FD5E11CD1D124A8200F04834 /* Build configuration list for PBXNativeTarget "SimpleDemoUITests" */ = {
 			isa = XCConfigurationList;
@@ -552,6 +572,7 @@
 				FD5E11CF1D124A8200F04834 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
