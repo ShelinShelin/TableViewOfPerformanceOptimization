@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+@class XLLayout;
 
 @interface XLMyCell : UITableViewCell
 
 @property (nonatomic, strong) UILabel *label;
+@property (nonatomic, strong) XLLayout *layout;
 
 + (XLMyCell *)myCellWithTableView:(UITableView *)tableView;
 

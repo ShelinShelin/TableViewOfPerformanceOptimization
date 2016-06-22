@@ -10,6 +10,7 @@
 #import "XLTableView.h"
 #import "XLMyCell.h"
 #import "XLItem.h"
+#import "XLLayout.h"
 
 @interface XLFeedListViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -36,7 +37,11 @@
             NSArray *feedlist = feedListDict[@"feedlist"];
             NSMutableArray *tempArray = [NSMutableArray arrayWithCapacity:10];
             for (NSDictionary *itemDict in feedlist) {
-                [tempArray addObject:[XLItem itemWithDict:itemDict]];
+                
+                XLItem *item = [XLItem itemWithDict:itemDict];
+                XLLayout *layout = [[XLLayout alloc] init];
+                layout.item = item;
+                [tempArray addObject:layout];
             }
             [self.dataArray addObjectsFromArray:tempArray];
         }
@@ -46,7 +51,6 @@
         });
     });
 }
-
 
 #pragma mark - lazt loading
 
@@ -69,7 +73,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     XLMyCell *cell = [XLMyCell myCellWithTableView:tableView];
-    
+    XLLayout *layout = self.dataArray[indexPath.row];
+    cell.layout = layout;
     return cell;
 }
 

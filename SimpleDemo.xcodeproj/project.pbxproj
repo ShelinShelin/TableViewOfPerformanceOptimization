@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		FD3DBE131D1A856B003F1184 /* feedlist.json in Resources */ = {isa = PBXBuildFile; fileRef = FD3DBE121D1A856B003F1184 /* feedlist.json */; };
 		FD3DBE171D1A8663003F1184 /* XLItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3DBE161D1A8663003F1184 /* XLItem.m */; };
+		FD3DBE1A1D1A8AEF003F1184 /* XLLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3DBE191D1A8AEF003F1184 /* XLLayout.m */; };
+		FD3DBE1E1D1A8D53003F1184 /* UIView+XLAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3DBE1D1D1A8D53003F1184 /* UIView+XLAdd.m */; };
 		FD5E119F1D124A8200F04834 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5E119E1D124A8200F04834 /* main.m */; };
 		FD5E11A21D124A8200F04834 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5E11A11D124A8200F04834 /* AppDelegate.m */; };
 		FD5E11A51D124A8200F04834 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5E11A41D124A8200F04834 /* ViewController.m */; };
@@ -47,6 +49,10 @@
 		FD3DBE121D1A856B003F1184 /* feedlist.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = feedlist.json; sourceTree = "<group>"; };
 		FD3DBE151D1A8663003F1184 /* XLItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLItem.h; sourceTree = "<group>"; };
 		FD3DBE161D1A8663003F1184 /* XLItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLItem.m; sourceTree = "<group>"; };
+		FD3DBE181D1A8AEF003F1184 /* XLLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLLayout.h; sourceTree = "<group>"; };
+		FD3DBE191D1A8AEF003F1184 /* XLLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLLayout.m; sourceTree = "<group>"; };
+		FD3DBE1C1D1A8D53003F1184 /* UIView+XLAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XLAdd.h"; sourceTree = "<group>"; };
+		FD3DBE1D1D1A8D53003F1184 /* UIView+XLAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+XLAdd.m"; sourceTree = "<group>"; };
 		FD5E119A1D124A8200F04834 /* SimpleDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD5E119E1D124A8200F04834 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FD5E11A01D124A8200F04834 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -108,8 +114,30 @@
 			children = (
 				FD3DBE151D1A8663003F1184 /* XLItem.h */,
 				FD3DBE161D1A8663003F1184 /* XLItem.m */,
+				FD3DBE181D1A8AEF003F1184 /* XLLayout.h */,
+				FD3DBE191D1A8AEF003F1184 /* XLLayout.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		FD3DBE1B1D1A8D35003F1184 /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				FD3DBE1C1D1A8D53003F1184 /* UIView+XLAdd.h */,
+				FD3DBE1D1D1A8D53003F1184 /* UIView+XLAdd.m */,
+			);
+			name = Supporting;
+			sourceTree = "<group>";
+		};
+		FD3DBE1F1D1A92E3003F1184 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FD5E11D61D124C5D00F04834 /* XLTableView.h */,
+				FD5E11D71D124C5D00F04834 /* XLTableView.m */,
+				FD5E11DE1D12521500F04834 /* XLMyCell.h */,
+				FD5E11DF1D12521500F04834 /* XLMyCell.m */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		FD5E11911D124A8200F04834 = {
@@ -135,19 +163,17 @@
 		FD5E119C1D124A8200F04834 /* SimpleDemo */ = {
 			isa = PBXGroup;
 			children = (
-				FD3DBE141D1A8627003F1184 /* Model */,
 				FD5E11A01D124A8200F04834 /* AppDelegate.h */,
 				FD5E11A11D124A8200F04834 /* AppDelegate.m */,
-				FD5E11D61D124C5D00F04834 /* XLTableView.h */,
-				FD5E11D71D124C5D00F04834 /* XLTableView.m */,
+				FD3DBE1B1D1A8D35003F1184 /* Supporting */,
+				FD3DBE141D1A8627003F1184 /* Model */,
+				FD3DBE1F1D1A92E3003F1184 /* View */,
 				FD5E11D01D124AF800F04834 /* XLBaseViewController.h */,
 				FD5E11D11D124AF800F04834 /* XLBaseViewController.m */,
 				FD5E11D31D124B2D00F04834 /* XLExampleList.h */,
 				FD5E11D41D124B2D00F04834 /* XLExampleList.m */,
 				FD5E11D91D124FF200F04834 /* XLFeedListViewController.h */,
 				FD5E11DA1D124FF200F04834 /* XLFeedListViewController.m */,
-				FD5E11DE1D12521500F04834 /* XLMyCell.h */,
-				FD5E11DF1D12521500F04834 /* XLMyCell.m */,
 				FD5E119D1D124A8200F04834 /* Supporting Files */,
 			);
 			path = SimpleDemo;
@@ -327,9 +353,11 @@
 				FD5E11D51D124B2D00F04834 /* XLExampleList.m in Sources */,
 				FD3DBE171D1A8663003F1184 /* XLItem.m in Sources */,
 				FD5E11A21D124A8200F04834 /* AppDelegate.m in Sources */,
+				FD3DBE1A1D1A8AEF003F1184 /* XLLayout.m in Sources */,
 				FD5E11D81D124C5D00F04834 /* XLTableView.m in Sources */,
 				FD5E119F1D124A8200F04834 /* main.m in Sources */,
 				FD5E11D21D124AF800F04834 /* XLBaseViewController.m in Sources */,
+				FD3DBE1E1D1A8D53003F1184 /* UIView+XLAdd.m in Sources */,
 				FD5E11E01D12521500F04834 /* XLMyCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
