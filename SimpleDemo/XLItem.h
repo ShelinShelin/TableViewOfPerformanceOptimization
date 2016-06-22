@@ -14,6 +14,8 @@
 @property (nonatomic, copy) NSString *iconName;
 @property (nonatomic, copy) NSString *status;
 @property (nonatomic, copy) NSArray *images;
+@property (nonatomic, copy) NSString *publicTime;
+@property (nonatomic, copy) NSString *from;
 
 - (instancetype)initWithDict:(NSDictionary *)dict;
 + (instancetype)itemWithDict:(NSDictionary *)dict;

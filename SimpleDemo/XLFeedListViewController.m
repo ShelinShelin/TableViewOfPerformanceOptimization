@@ -59,7 +59,6 @@
         _tableView = [[XLTableView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.rowHeight = 100;
     }
     return _tableView;
 }
@@ -67,6 +66,7 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+//    NSLog(@"%@",self.dataArray );
     return self.dataArray.count;
 }
 
@@ -76,6 +76,11 @@
     XLLayout *layout = self.dataArray[indexPath.row];
     cell.layout = layout;
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    XLLayout *layout = self.dataArray[indexPath.row];
+    return layout.cellHeight;
 }
 
 #pragma mark - lazy loading

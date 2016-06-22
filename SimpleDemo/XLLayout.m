@@ -7,39 +7,62 @@
 //
 
 #import "XLLayout.h"
+#import "XLItem.h"
+#import "NSAttributedString+XLAdd.h"
 
-#define margin 10.0f
-#define iconSize 40.0f
-#define textFont [UIFont systemFontOfSize:14.0f]
-#define textColor [UIColor colorWithRed:0.72.f green:0.72.f blue:0.72.f alpha:1.0f]
-
-@implementation XLLayout {
-    CGRect _iconLayout;
-    CGRect _userNameLayout;
-    CGRect _statusLayout;
-    CGRect _imageLayout;
-}
+@implementation XLLayout
 
 - (void)setItem:(XLItem *)item {
     if (_item == item) return;
     _item = item;
     
     //iconView layout
-    _iconLayout = CGRectMake(margin, margin, iconSize, iconSize);
+    _iconLayout = CGRectMake(MARGIN, MARGIN, ICON_SIZE, ICON_SIZE);
     
     //userName layout
-    _userNameLayout = CGRectMake(CGRectGetMaxX(_iconLayout) + margin, margin, 100, 100);
+    _userNameLayout = CGRectMake(CGRectGetMaxX(_iconLayout) + MARGIN, MARGIN, 100, ICON_SIZE);
     
     //status layout
+    NSMutableAttributedString *muAttrStr = [[NSMutableAttributedString alloc] initWithString:item.status];
+    [muAttrStr addAttribute:NSForegroundColorAttributeName value:TEXT_COLOR range:NSMakeRange(0, muAttrStr.length)];
+    [muAttrStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14.0f] range:NSMakeRange(0, muAttrStr.length)];
+    
+    CGSize textSize = [muAttrStr boundingRectWithMaxWidh:(SCREEN_WIDTH - 2 * MARGIN)];
+    _statusLayout = CGRectMake(MARGIN, CGRectGetMaxY(_iconLayout) + MARGIN, textSize.width, textSize.height);
     
     //images layout
+    CGSize imagesSize;
+    switch (item.images.count) {
+        case 0:
+            imagesSize = CGSizeMake(0, 0);
+            break;
+        case 1:
+        case 2:
+        case 3:
+            imagesSize = CGSizeMake(SCREEN_WIDTH - 2 * MARGIN, 80);
+            break;
+        case 4:
+        case 5:
+        case 6:
+            imagesSize = CGSizeMake(SCREEN_WIDTH - 2 * MARGIN, 80 * 2);
+            break;
+        case 7:
+        case 8:
+        case 9:
+            imagesSize = CGSizeMake(SCREEN_WIDTH - 2 * MARGIN, 80 * 3);
+            break;
+        default:
+            break;
+    }
+    _imagesLayout = CGRectMake(MARGIN, CGRectGetMaxY(_statusLayout) + MARGIN, imagesSize.width, imagesSize.height);
     
     //tool bar layot
+    _toolBarLayout = CGRectMake(MARGIN, CGRectGetMaxY(_imagesLayout) + MARGIN, SCREEN_WIDTH - 2 * MARGIN, 44);
     
 }
 
 - (CGFloat)cellHeight {
-    return 100;
+    return CGRectGetMaxY(_toolBarLayout) + MARGIN;
 }
 
 @end
