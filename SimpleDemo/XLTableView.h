@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@class XLTableView;
+
 
 @interface XLTableView : UITableView
 
@@ -15,8 +15,4 @@
 @end
 
 
-@interface XLTableView (XLAdd)
 
-@property (nonatomic, strong) NSMutableArray *precacheIndexArray;
-
-@end

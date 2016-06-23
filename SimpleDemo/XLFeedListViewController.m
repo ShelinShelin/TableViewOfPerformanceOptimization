@@ -11,6 +11,7 @@
 #import "XLMyCell.h"
 #import "XLItem.h"
 #import "XLLayout.h"
+#import "UITableView+XLHeightCache.h"
 
 @interface XLFeedListViewController () <UITableViewDelegate, UITableViewDataSource>
 

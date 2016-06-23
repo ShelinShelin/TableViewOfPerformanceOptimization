@@ -30,9 +30,6 @@
     
     [KMCGeigerCounter sharedGeigerCounter].enabled = YES;
     
-//    YYFPSLabel *fps = [[YYFPSLabel alloc] initWithFrame:CGRectMake(10, [UIScreen mainScreen].bounds.size.height - 40, 60, 30)];
-//    
-//    [self.window addSubview:fps];
     return YES;
 }
 
