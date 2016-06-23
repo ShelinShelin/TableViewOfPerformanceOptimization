@@ -55,11 +55,10 @@
         [self.contentView addSubview:self.statusLabel];
         
         self.imageArray = [NSMutableArray arrayWithCapacity:9];
-        for (int i = 0; i < 3; i ++) {
-            UIImageView *imageView = [[UIImageView alloc] init];
-//            imageView.hidden = YES;
-            [self.imageArray addObject:imageView];
-        }
+//        for (int i = 0; i < 3; i ++) {
+//            UIImageView *imageView = [[UIImageView alloc] init];
+//            [self.imageArray addObject:imageView];
+//        }
         
         
     }
@@ -87,14 +86,13 @@
     [muAttrStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14.0f] range:NSMakeRange(0, muAttrStr.length)];
     self.statusLabel.attrText = muAttrStr;
     
-    for (int i = 0; i < 3; i ++)  {
-        UIImageView *imageView = self.imageArray[i];
-        imageView.frame = CGRectMake(i * (IMAGE_SIZE + MARGIN) + MARGIN, CGRectGetMaxY(layout.statusLayout) + MARGIN, IMAGE_SIZE, IMAGE_SIZE);
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"bg_image" ofType:@"jpg"];
-        imageView.image = [UIImage imageWithContentsOfFile:filePath];
-        
-        [self.contentView addSubview:imageView];
-    }
+//    for (int i = 0; i < 3; i ++)  {
+//        UIImageView *imageView = self.imageArray[i];
+//        imageView.frame = CGRectMake(i * (IMAGE_SIZE + MARGIN) + MARGIN, CGRectGetMaxY(layout.statusLayout) + MARGIN, IMAGE_SIZE, IMAGE_SIZE);
+//        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"bg_image" ofType:@"jpg"];
+//        imageView.image = [UIImage imageWithContentsOfFile:filePath];
+//        [self.contentView addSubview:imageView];
+//    }
 
     [self draw];
 }

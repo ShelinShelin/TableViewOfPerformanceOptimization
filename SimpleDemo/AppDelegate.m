@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "XLExampleList.h"
-#import "YYFPSLabel.h"
 #import "KMCGeigerCounter.h"
 
 @interface AppDelegate ()

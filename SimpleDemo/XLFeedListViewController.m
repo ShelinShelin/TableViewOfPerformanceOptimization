@@ -52,7 +52,7 @@
     });
 }
 
-#pragma mark - lazt loading
+#pragma mark - lazy loading
 
 - (XLTableView *)tableView {
     if (!_tableView) {

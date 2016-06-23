@@ -14,27 +14,25 @@
 
 @implementation XLLayout
 
-- (void)setItem:(XLItem *)item {
-    if (_item == item) return;
-    _item = item;
-    
+- (void)layoutCalculate {
     //iconView layout
+    
     _iconLayout = CGRectMake(MARGIN, MARGIN, ICON_SIZE, ICON_SIZE);
     
     //userName layout
-    CGSize userNameSize = [item.userName sizeWithMaxWidth:MAXFLOAT font:TEXT_FONT];
+    CGSize userNameSize = [_item.userName sizeWithMaxWidth:MAXFLOAT font:TEXT_FONT];
     _userNameLayout = CGRectMake(CGRectGetMaxX(_iconLayout) + MARGIN, MARGIN, userNameSize.width, userNameSize.height);
     
     //from layout
-    CGSize fromSize = [item.from sizeWithMaxWidth:MAXFLOAT font:MID_TEXT_FONT];
+    CGSize fromSize = [_item.from sizeWithMaxWidth:MAXFLOAT font:MID_TEXT_FONT];
     _fromLayout = CGRectMake(_userNameLayout.origin.x, CGRectGetMaxY(_userNameLayout) + MARGIN / 2.0, fromSize.width, fromSize.height);
     
     //public time
-    CGSize publicTimeSize = [item.publicTime sizeWithMaxWidth:MAXFLOAT font:MID_TEXT_FONT];
+    CGSize publicTimeSize = [_item.publicTime sizeWithMaxWidth:MAXFLOAT font:MID_TEXT_FONT];
     _publicTimeLayout = CGRectMake(CGRectGetMaxX(_fromLayout) + MARGIN, _fromLayout.origin.y, publicTimeSize.width, publicTimeSize.height);
-
+    
     //status layout
-    NSMutableAttributedString *muAttrStr = [[NSMutableAttributedString alloc] initWithString:item.status];
+    NSMutableAttributedString *muAttrStr = [[NSMutableAttributedString alloc] initWithString:_item.status];
     [muAttrStr addAttribute:NSForegroundColorAttributeName value:TEXT_COLOR range:NSMakeRange(0, muAttrStr.length)];
     [muAttrStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14.0f] range:NSMakeRange(0, muAttrStr.length)];
     
@@ -43,7 +41,7 @@
     
     //images layout
     CGSize imagesSize;
-    switch (item.images.count) {
+    switch (_item.images.count) {
         case 0:
             imagesSize = CGSizeMake(0, 0);
             break;
@@ -69,8 +67,13 @@
     
     //tool bar layot
     _toolBarLayout = CGRectMake(MARGIN, CGRectGetMaxY(_imagesLayout) + MARGIN, SCREEN_WIDTH - 2 * MARGIN, 44);
-    
 }
+
+//- (void)setItem:(XLItem *)item {
+//    if (_item == item) return;
+//    _item = item;
+//
+//}
 
 - (CGFloat)cellHeight {
     return CGRectGetMaxY(_toolBarLayout) + MARGIN;
