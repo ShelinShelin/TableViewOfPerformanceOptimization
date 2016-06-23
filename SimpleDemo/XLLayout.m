@@ -9,6 +9,8 @@
 #import "XLLayout.h"
 #import "XLItem.h"
 #import "NSAttributedString+XLAdd.h"
+#import "NSString+XLAdd.h"
+//#import "UIView+XLAdd.h"
 
 @implementation XLLayout
 
@@ -20,8 +22,17 @@
     _iconLayout = CGRectMake(MARGIN, MARGIN, ICON_SIZE, ICON_SIZE);
     
     //userName layout
-    _userNameLayout = CGRectMake(CGRectGetMaxX(_iconLayout) + MARGIN, MARGIN, 100, ICON_SIZE);
+    CGSize userNameSize = [item.userName sizeWithMaxWidth:MAXFLOAT font:TEXT_FONT];
+    _userNameLayout = CGRectMake(CGRectGetMaxX(_iconLayout) + MARGIN, MARGIN, userNameSize.width, userNameSize.height);
     
+    //from layout
+    CGSize fromSize = [item.from sizeWithMaxWidth:MAXFLOAT font:MID_TEXT_FONT];
+    _fromLayout = CGRectMake(_userNameLayout.origin.x, CGRectGetMaxY(_userNameLayout) + MARGIN / 2.0, fromSize.width, fromSize.height);
+    
+    //public time
+    CGSize publicTimeSize = [item.publicTime sizeWithMaxWidth:MAXFLOAT font:MID_TEXT_FONT];
+    _publicTimeLayout = CGRectMake(CGRectGetMaxX(_fromLayout) + MARGIN, _fromLayout.origin.y, publicTimeSize.width, publicTimeSize.height);
+
     //status layout
     NSMutableAttributedString *muAttrStr = [[NSMutableAttributedString alloc] initWithString:item.status];
     [muAttrStr addAttribute:NSForegroundColorAttributeName value:TEXT_COLOR range:NSMakeRange(0, muAttrStr.length)];
@@ -39,17 +50,17 @@
         case 1:
         case 2:
         case 3:
-            imagesSize = CGSizeMake(SCREEN_WIDTH - 2 * MARGIN, 80);
+            imagesSize = CGSizeMake(SCREEN_WIDTH - 2 * MARGIN, IMAGE_SIZE);
             break;
         case 4:
         case 5:
         case 6:
-            imagesSize = CGSizeMake(SCREEN_WIDTH - 2 * MARGIN, 80 * 2);
+            imagesSize = CGSizeMake(SCREEN_WIDTH - 2 * MARGIN, IMAGE_SIZE * 2);
             break;
         case 7:
         case 8:
         case 9:
-            imagesSize = CGSizeMake(SCREEN_WIDTH - 2 * MARGIN, 80 * 3);
+            imagesSize = CGSizeMake(SCREEN_WIDTH - 2 * MARGIN, IMAGE_SIZE * 3);
             break;
         default:
             break;
@@ -63,6 +74,10 @@
 
 - (CGFloat)cellHeight {
     return CGRectGetMaxY(_toolBarLayout) + MARGIN;
+}
+
+- (CGRect)postBgLayout {
+    return CGRectMake(0, 0, SCREEN_WIDTH, self.cellHeight);
 }
 
 @end

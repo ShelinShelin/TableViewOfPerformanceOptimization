@@ -25,11 +25,11 @@
 		FD5E11DB1D124FF200F04834 /* XLFeedListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5E11DA1D124FF200F04834 /* XLFeedListViewController.m */; };
 		FD5E11E01D12521500F04834 /* XLMyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5E11DF1D12521500F04834 /* XLMyCell.m */; };
 		FD5E11E41D1254DE00F04834 /* bg_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD5E11E31D1254DE00F04834 /* bg_image.jpg */; };
-		FD5E11EA1D1256AF00F04834 /* YYFPSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5E11E91D1256AF00F04834 /* YYFPSLabel.m */; };
 		FD7E64101D1AB1B100DD054A /* XLLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FD7E640F1D1AB1B100DD054A /* XLLabel.m */; };
 		FD7E64121D1AB60E00DD054A /* feedlist.json in Resources */ = {isa = PBXBuildFile; fileRef = FD7E64111D1AB60E00DD054A /* feedlist.json */; };
 		FD7E64151D1ABCA100DD054A /* NSAttributedString+XLAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = FD7E64141D1ABCA100DD054A /* NSAttributedString+XLAdd.m */; };
 		FD7E64171D1AC43C00DD054A /* shelin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD7E64161D1AC43C00DD054A /* shelin.jpg */; };
+		FDFB61931D1B9055004251B3 /* NSString+XLAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = FDFB61921D1B9055004251B3 /* NSString+XLAdd.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,14 +85,14 @@
 		FD5E11DE1D12521500F04834 /* XLMyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLMyCell.h; sourceTree = "<group>"; };
 		FD5E11DF1D12521500F04834 /* XLMyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLMyCell.m; sourceTree = "<group>"; };
 		FD5E11E31D1254DE00F04834 /* bg_image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg_image.jpg; sourceTree = "<group>"; };
-		FD5E11E81D1256AF00F04834 /* YYFPSLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYFPSLabel.h; sourceTree = "<group>"; };
-		FD5E11E91D1256AF00F04834 /* YYFPSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYFPSLabel.m; sourceTree = "<group>"; };
 		FD7E640E1D1AB1B100DD054A /* XLLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLLabel.h; sourceTree = "<group>"; };
 		FD7E640F1D1AB1B100DD054A /* XLLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLLabel.m; sourceTree = "<group>"; };
 		FD7E64111D1AB60E00DD054A /* feedlist.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = feedlist.json; sourceTree = "<group>"; };
 		FD7E64131D1ABCA100DD054A /* NSAttributedString+XLAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+XLAdd.h"; sourceTree = "<group>"; };
 		FD7E64141D1ABCA100DD054A /* NSAttributedString+XLAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+XLAdd.m"; sourceTree = "<group>"; };
 		FD7E64161D1AC43C00DD054A /* shelin.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = shelin.jpg; sourceTree = "<group>"; };
+		FDFB61911D1B9055004251B3 /* NSString+XLAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+XLAdd.h"; sourceTree = "<group>"; };
+		FDFB61921D1B9055004251B3 /* NSString+XLAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+XLAdd.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +140,8 @@
 				FD3DBE1D1D1A8D53003F1184 /* UIView+XLAdd.m */,
 				FD7E64131D1ABCA100DD054A /* NSAttributedString+XLAdd.h */,
 				FD7E64141D1ABCA100DD054A /* NSAttributedString+XLAdd.m */,
+				FDFB61911D1B9055004251B3 /* NSString+XLAdd.h */,
+				FDFB61921D1B9055004251B3 /* NSString+XLAdd.m */,
 			);
 			name = Supporting;
 			sourceTree = "<group>";
@@ -200,8 +202,6 @@
 			isa = PBXGroup;
 			children = (
 				FD7E64111D1AB60E00DD054A /* feedlist.json */,
-				FD5E11E81D1256AF00F04834 /* YYFPSLabel.h */,
-				FD5E11E91D1256AF00F04834 /* YYFPSLabel.m */,
 				FD5E11E31D1254DE00F04834 /* bg_image.jpg */,
 				FD7E64161D1AC43C00DD054A /* shelin.jpg */,
 				FD5E11A31D124A8200F04834 /* ViewController.h */,
@@ -366,7 +366,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD5E11EA1D1256AF00F04834 /* YYFPSLabel.m in Sources */,
 				FD5E11A51D124A8200F04834 /* ViewController.m in Sources */,
 				FD5E11DB1D124FF200F04834 /* XLFeedListViewController.m in Sources */,
 				FD5E11D51D124B2D00F04834 /* XLExampleList.m in Sources */,
@@ -377,6 +376,7 @@
 				FD3DBE1A1D1A8AEF003F1184 /* XLLayout.m in Sources */,
 				FD5E11D81D124C5D00F04834 /* XLTableView.m in Sources */,
 				FD5E119F1D124A8200F04834 /* main.m in Sources */,
+				FDFB61931D1B9055004251B3 /* NSString+XLAdd.m in Sources */,
 				FD5E11D21D124AF800F04834 /* XLBaseViewController.m in Sources */,
 				FD3DBE1E1D1A8D53003F1184 /* UIView+XLAdd.m in Sources */,
 				FD3981311D1AD794001A041D /* KMCGeigerCounter.m in Sources */,
