@@ -19,7 +19,7 @@
 @property (nonatomic, strong) XLLabel *statusLabel;
 @property (nonatomic, strong) UIImageView *postBgView;
 @property (nonatomic, strong) UIButton *avatarView;
-@property (nonatomic, strong) NSMutableArray *imageArray;
+//@property (nonatomic, strong) NSMutableArray *imageArray;
 
 
 @end
@@ -54,7 +54,7 @@
         
         [self.contentView addSubview:self.statusLabel];
         
-        self.imageArray = [NSMutableArray arrayWithCapacity:9];
+//        self.imageArray = [NSMutableArray arrayWithCapacity:9];
 //        for (int i = 0; i < 3; i ++) {
 //            UIImageView *imageView = [[UIImageView alloc] init];
 //            [self.imageArray addObject:imageView];

@@ -15,7 +15,7 @@
 @interface XLFeedListViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) XLTableView *tableView;
-@property (nonatomic, copy) NSMutableArray *dataArray;
+@property (nonatomic, strong) NSMutableArray *dataArray;
 
 @end
 
@@ -45,8 +45,8 @@
             }
             [self.dataArray addObjectsFromArray:tempArray];
         }
-        
         dispatch_async(dispatch_get_main_queue(), ^{
+            self.tableView.precacheIndexArray = self.dataArray.mutableCopy;
             [self.tableView reloadData];
         });
     });

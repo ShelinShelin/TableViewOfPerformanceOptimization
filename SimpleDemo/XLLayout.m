@@ -69,11 +69,11 @@
     _toolBarLayout = CGRectMake(MARGIN, CGRectGetMaxY(_imagesLayout) + MARGIN, SCREEN_WIDTH - 2 * MARGIN, 44);
 }
 
-//- (void)setItem:(XLItem *)item {
-//    if (_item == item) return;
-//    _item = item;
-//
-//}
+- (void)setItem:(XLItem *)item {
+    if (_item == item) return;
+    _item = item;
+    [self layoutCalculate];
+}
 
 - (CGFloat)cellHeight {
     return CGRectGetMaxY(_toolBarLayout) + MARGIN;
