@@ -24,14 +24,14 @@
 - (void)addRunloopObserver {
     
     CFRunLoopRef runloop = CFRunLoopGetCurrent();
-    CFRunLoopObserverRef observer = CFRunLoopObserverCreateWithHandler(kCFAllocatorDefault, kCFRunLoopBeforeWaiting, true, 0, ^(CFRunLoopObserverRef observer, CFRunLoopActivity _) {
+    CFRunLoopObserverRef defaultModeObserver = CFRunLoopObserverCreateWithHandler(kCFAllocatorDefault, kCFRunLoopBeforeWaiting, true, 0, ^(CFRunLoopObserverRef observer, CFRunLoopActivity _) {
         
-            if (self.precacheIndexArray.count == 0) {
-                
-                CFRunLoopRemoveObserver(runloop, observer, kCFRunLoopDefaultMode);
-                CFRelease(observer); // 注意释放，否则会造成内存泄露
-                return;
-            }
+        if (self.precacheIndexArray.count == 0) {
+            
+            CFRunLoopRemoveObserver(runloop, observer, kCFRunLoopDefaultMode);
+            CFRelease(observer);
+            return;
+        }
         
         XLLayout *layout = self.precacheIndexArray.firstObject;
         [self.precacheIndexArray removeObject:layout];
@@ -43,7 +43,7 @@
                         modes:@[NSDefaultRunLoopMode]];
     });
     
-    CFRunLoopAddObserver(runloop, observer, kCFRunLoopDefaultMode);
+    CFRunLoopAddObserver(runloop, defaultModeObserver, kCFRunLoopDefaultMode);
 }
 
 //pre cache cell height
@@ -55,6 +55,8 @@
 }
 
 @end
+
+
 
 @implementation XLTableView (XLAdd)
 
