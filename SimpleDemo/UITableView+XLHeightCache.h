@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class XLLayout;
 
-@interface XLCellHeightCache : NSObject
+@interface XLCellLayoutCache : NSObject
 
 @end
 

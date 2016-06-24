@@ -16,9 +16,9 @@
  ==========================================================
  */
 
-@interface XLCellHeightCache ()
+@interface XLCellLayoutCache ()
 
-@property (nonatomic, strong) NSCache *cellHeightCache;
+@property (nonatomic, strong) NSCache *cellLayoutCache;
 
 - (void)cacheLayout:(XLLayout *)layout forKey:(NSString *)key;
 - (XLLayout *)layoutForKey:(NSString *)key;
@@ -27,33 +27,33 @@
 
 @end
 
-@implementation XLCellHeightCache
+@implementation XLCellLayoutCache
 
 - (void)cacheLayout:(XLLayout *)layout forKey:(NSString *)key {
     if (layout == nil) return;
-    [self.cellHeightCache setObject:layout forKey:key];
+    [self.cellLayoutCache setObject:layout forKey:key];
 }
 
 - (XLLayout *)layoutForKey:(NSString *)key {
-    XLLayout *layout = [self.cellHeightCache objectForKey:key];
+    XLLayout *layout = [self.cellLayoutCache objectForKey:key];
     return layout;
 }
 
 - (void)removeLayoutForKey:(NSString *)key {
-    [self.cellHeightCache removeObjectForKey:key];
+    [self.cellLayoutCache removeObjectForKey:key];
 }
 
 - (void)removeAllLayoutCache {
-    [self.cellHeightCache removeAllObjects];
+    [self.cellLayoutCache removeAllObjects];
 }
 
 #pragma mark - lazy loading
 
-- (NSCache *)cellHeightCache {
-    if (!_cellHeightCache) {
-        _cellHeightCache = [[NSCache alloc] init];
+- (NSCache *)cellLayoutCache {
+    if (!_cellLayoutCache) {
+        _cellLayoutCache = [[NSCache alloc] init];
     }
-    return _cellHeightCache;
+    return _cellLayoutCache;
 }
 
 @end
@@ -66,11 +66,13 @@
 
 @implementation UITableView (XLHeightCache)
 
+/**
+ *  exchange of reloadDataMethod and myReloadDataMethod
+ */
 + (void)load {
     SEL reloadDataMethod = @selector(reloadData);
     SEL myReloadDataMethod = @selector(myReloadData);
     
-    //exchange of reloadDataMethod and myReloadDataMethod
     Method originalMethod = class_getInstanceMethod(self, reloadDataMethod);
     Method swizzledMethod = class_getInstanceMethod(self, myReloadDataMethod);
     method_exchangeImplementations(originalMethod, swizzledMethod);
@@ -115,19 +117,19 @@ static const char heightCacheKey;
  */
 - (void)addRunloopObserver {
     
-    NSMutableArray *muIndexPathsToBePrecached = self.allIndexPathsToBePrecached.mutableCopy;
+    NSMutableArray *indexPathsToBePrecachedArray = self.allIndexPathsToBePrecached.mutableCopy;
     
     CFRunLoopRef runloop = CFRunLoopGetCurrent();
     CFRunLoopObserverRef defaultModeObserver = CFRunLoopObserverCreateWithHandler(kCFAllocatorDefault, kCFRunLoopBeforeWaiting, true, 0, ^(CFRunLoopObserverRef observer, CFRunLoopActivity _) {
         
-        if (muIndexPathsToBePrecached.count == 0) {
+        if (indexPathsToBePrecachedArray.count == 0) {
             CFRunLoopRemoveObserver(runloop, observer, kCFRunLoopDefaultMode);
             CFRelease(observer);
             return;
         }
         
-        NSIndexPath *indexPath = muIndexPathsToBePrecached.firstObject;
-        [muIndexPathsToBePrecached removeObject:indexPath];
+        NSIndexPath *indexPath = indexPathsToBePrecachedArray.firstObject;
+        [indexPathsToBePrecachedArray removeObject:indexPath];
         
         [self performSelector:@selector(precacheIndexPathIfNeeded:)
                      onThread:[NSThread mainThread]
@@ -160,29 +162,29 @@ static const char heightCacheKey;
 #pragma public method
 
 - (void)removeLayoutCacheOfCellForKey:(NSString *)key {
-    [self.cellHeightCache removeLayoutForKey:key];
+    [self.celllayoutCache removeLayoutForKey:key];
 }
 
 - (void)removeAllLayoutCacheOfCell {
-    [self.cellHeightCache removeAllLayoutCache];
+    [self.celllayoutCache removeAllLayoutCache];
 }
 
 - (void)cacheCellLayout:(XLLayout *)layout forKey:(NSString *)key {
-    [self.cellHeightCache cacheLayout:layout forKey:key];
+    [self.celllayoutCache cacheLayout:layout forKey:key];
 }
 
 - (XLLayout *)cellOfLayoutForKey:(NSString *)key {
-    return [self.cellHeightCache layoutForKey:key];
+    return [self.celllayoutCache layoutForKey:key];
 }
 
 #pragma mark - getter setter
 
-- (XLCellHeightCache *)cellHeightCache {
-    XLCellHeightCache *cache = objc_getAssociatedObject(self, &heightCacheKey);
+- (XLCellLayoutCache *)celllayoutCache {
+    XLCellLayoutCache *cache = objc_getAssociatedObject(self, &heightCacheKey);
     
     if (cache == nil) {
         
-        cache = [[XLCellHeightCache alloc]init];
+        cache = [[XLCellLayoutCache alloc]init];
         objc_setAssociatedObject(self, &heightCacheKey, cache, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     return cache;
