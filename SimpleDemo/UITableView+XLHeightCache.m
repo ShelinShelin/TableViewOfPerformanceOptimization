@@ -10,6 +10,12 @@
 #import "XLLayout.h"
 #import <objc/runtime.h>
 
+/**
+ ==========================================================
+ XLCellHeightCache: Used to cache layout objects
+ ==========================================================
+ */
+
 @interface XLCellHeightCache ()
 
 @property (nonatomic, strong) NSCache *cellHeightCache;
@@ -54,16 +60,17 @@
 
 /**
  ==========================================================
+ UITableView + XLHeightCache
  ==========================================================
  */
 
 @implementation UITableView (XLHeightCache)
 
-
 + (void)load {
     SEL reloadDataMethod = @selector(reloadData);
     SEL myReloadDataMethod = @selector(myReloadData);
     
+    //exchange of reloadDataMethod and myReloadDataMethod
     Method originalMethod = class_getInstanceMethod(self, reloadDataMethod);
     Method swizzledMethod = class_getInstanceMethod(self, myReloadDataMethod);
     method_exchangeImplementations(originalMethod, swizzledMethod);
@@ -71,20 +78,23 @@
 
 - (void)myReloadData {
     [self myReloadData];
+    //add pre caches
     [self precacheIfNeeded];
 }
 
 static const char heightCacheKey;
 
-// tableView all indexPath to be cache
+/**
+ *  tableView all indexPath to be cache
+ */
 - (NSArray *)allIndexPathsToBePrecached {
     
     NSMutableArray *allIndexPaths = @[].mutableCopy;
-    
     for (NSInteger section = 0; section < [self numberOfSections]; section ++) {
         for (NSInteger row = 0; row < [self numberOfRowsInSection:section]; row ++) {
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
-            
+
+            //When the layout cache is does not exist
             if (![self cellOfLayoutForKey:[self cacheKeyWithIndexPath:indexPath]]) {
                 [allIndexPaths addObject:indexPath];
             } 
@@ -100,6 +110,9 @@ static const char heightCacheKey;
     [self addRunloopObserver];
 }
 
+/**
+ *  add runloop observer, calculate the layout in runloop spare time
+ */
 - (void)addRunloopObserver {
     
     NSMutableArray *muIndexPathsToBePrecached = self.allIndexPathsToBePrecached.mutableCopy;
@@ -126,10 +139,12 @@ static const char heightCacheKey;
     CFRunLoopAddObserver(runloop, defaultModeObserver, kCFRunLoopDefaultMode);
 }
 
-//calculatec pre cache cell height
+/**
+ *  calculatec pre cache cell height
+ */
 - (void)precacheIndexPathIfNeeded:(NSIndexPath *)indexPath {
     
-    XLLayout *layout = self.precacheIndexArray[indexPath.row];
+    XLLayout *layout = self.precacheLayoutArray[indexPath.row];
     [layout layoutCalculate];
     
     //缓存高度
@@ -175,12 +190,12 @@ static const char heightCacheKey;
 
 static const char nameKey;
 
-- (NSMutableArray *)precacheIndexArray {
+- (NSMutableArray *)precacheLayoutArray {
     return objc_getAssociatedObject(self, &nameKey);
 }
 
-- (void)setPrecacheIndexArray:(NSMutableArray *)precacheIndexArray {
-    objc_setAssociatedObject(self, &nameKey, precacheIndexArray, OBJC_ASSOCIATION_RETAIN);
+- (void)setPrecacheLayoutArray:(NSMutableArray *)precacheLayoutArray {
+    objc_setAssociatedObject(self, &nameKey, precacheLayoutArray, OBJC_ASSOCIATION_RETAIN);
 }
 
 static const char identifyKey;

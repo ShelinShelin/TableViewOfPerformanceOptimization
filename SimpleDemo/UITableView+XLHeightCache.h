@@ -13,7 +13,6 @@
 
 @end
 
-
 @interface UITableView (XLHeightCache)
 
 - (void)removeLayoutCacheOfCellForKey:(NSString *)key;
@@ -23,8 +22,14 @@
 
 - (NSString *)cacheKeyWithIndexPath:(NSIndexPath *)indexPath;
 
-@property (nonatomic, strong) NSMutableArray *precacheIndexArray;
+/**
+ *  Use to store all the precache layout objects
+ */
+@property (nonatomic, strong) NSMutableArray *precacheLayoutArray;
 
+/**
+ *  identify for key
+ */
 @property (nonatomic, copy) NSString *identify;
 
 @end

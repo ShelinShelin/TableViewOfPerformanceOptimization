@@ -19,7 +19,7 @@
         return [self cellOfLayoutForKey:key];
     }
     
-    XLLayout *layout = self.precacheIndexArray[indexPath.row];
+    XLLayout *layout = self.precacheLayoutArray[indexPath.row];
     [layout layoutCalculate];
     [self cacheCellLayout:layout forKey:[self cacheKeyWithIndexPath:indexPath]];
     

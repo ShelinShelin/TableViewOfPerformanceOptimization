@@ -48,7 +48,8 @@
             [self.dataArray addObjectsFromArray:tempArray];
         }
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.tableView.precacheIndexArray = self.dataArray.mutableCopy;
+            
+            self.tableView.precacheLayoutArray = self.dataArray.copy;
             [self.tableView reloadData];
         });
     });
@@ -75,7 +76,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     XLMyCell *cell = [XLMyCell myCellWithTableView:tableView];
-    
     XLLayout *layout = [tableView layoutCellWithKey:[tableView cacheKeyWithIndexPath:indexPath] indexPath:indexPath];
     cell.layout = layout;
     return cell;

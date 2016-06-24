@@ -34,6 +34,9 @@
 
 @property (nonatomic, strong) XLItem *item;
 
+/**
+ *  calculate the layout
+ */
 - (void)layoutCalculate;
 
 @end

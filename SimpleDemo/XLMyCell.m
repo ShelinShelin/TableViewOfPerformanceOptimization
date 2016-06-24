@@ -13,13 +13,13 @@
 #import "UIView+XLAdd.h"
 
 @interface XLMyCell () {
-    BOOL _isDraw;
+    BOOL _isDrawing;
 }
 
 @property (nonatomic, strong) XLLabel *statusLabel;
 @property (nonatomic, strong) UIImageView *postBgView;
 @property (nonatomic, strong) UIButton *avatarView;
-//@property (nonatomic, strong) NSMutableArray *imageArray;
+@property (nonatomic, strong) NSMutableArray *imageArray;
 
 
 @end
@@ -54,11 +54,11 @@
         
         [self.contentView addSubview:self.statusLabel];
         
-//        self.imageArray = [NSMutableArray arrayWithCapacity:9];
-//        for (int i = 0; i < 3; i ++) {
-//            UIImageView *imageView = [[UIImageView alloc] init];
-//            [self.imageArray addObject:imageView];
-//        }
+        self.imageArray = [NSMutableArray arrayWithCapacity:9];
+        for (int i = 0; i < 3; i ++) {
+            UIImageView *imageView = [[UIImageView alloc] init];
+            [self.imageArray addObject:imageView];
+        }
         
         
     }
@@ -86,25 +86,25 @@
     [muAttrStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14.0f] range:NSMakeRange(0, muAttrStr.length)];
     self.statusLabel.attrText = muAttrStr;
     
-//    for (int i = 0; i < 3; i ++)  {
-//        UIImageView *imageView = self.imageArray[i];
-//        imageView.frame = CGRectMake(i * (IMAGE_SIZE + MARGIN) + MARGIN, CGRectGetMaxY(layout.statusLayout) + MARGIN, IMAGE_SIZE, IMAGE_SIZE);
-//        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"bg_image" ofType:@"jpg"];
-//        imageView.image = [UIImage imageWithContentsOfFile:filePath];
-//        [self.contentView addSubview:imageView];
-//    }
+    for (int i = 0; i < 3; i ++)  {
+        UIImageView *imageView = self.imageArray[i];
+        imageView.frame = CGRectMake(i * (IMAGE_SIZE + MARGIN) + MARGIN, CGRectGetMaxY(layout.statusLayout) + MARGIN, IMAGE_SIZE, IMAGE_SIZE);
+        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"bg_image" ofType:@"jpg"];
+        imageView.image = [UIImage imageWithContentsOfFile:filePath];
+        [self.contentView addSubview:imageView];
+    }
 
     [self draw];
 }
 
 - (void)draw {
     
-    if (_isDraw) return;
+    if (_isDrawing) return;
     
     XLItem *item = _layout.item;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        _isDraw = YES;
+        _isDrawing = YES;
         
         UIGraphicsBeginImageContextWithOptions(_layout.postBgLayout.size, YES, 0);
         
@@ -128,7 +128,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             
             self.postBgView.image = image;
-            _isDraw = NO;
+            _isDrawing = NO;
         });
     });
 }
