@@ -11,11 +11,10 @@
 
 @implementation UITableView (XLLayoutCell)
 
-- (CGFloat)heightForLayoutCellWithKey:(NSString *)key {
+- (XLLayout *)layoutCellWithKey:(NSString *)key {
     if (key.length == 0) return 0;
-        
-    CGFloat cellHeight = [self heightOfCellForKey:key];
-    return cellHeight;
+    
+    return [self cellOfLayoutForKey:key];
 }
 
 @end

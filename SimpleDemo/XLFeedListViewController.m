@@ -60,6 +60,7 @@
         _tableView = [[XLTableView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.identify = @"XLCell";
     }
     return _tableView;
 }
@@ -67,20 +68,24 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    NSLog(@"%@",self.dataArray );
     return self.dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     XLMyCell *cell = [XLMyCell myCellWithTableView:tableView];
-    XLLayout *layout = self.dataArray[indexPath.row];
+//    XLLayout *layout = self.dataArray[indexPath.row];
+    
+    XLLayout *layout = [tableView cellOfLayoutForKey:[tableView cacheKeyWithIndexPath:indexPath]];
     cell.layout = layout;
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    XLLayout *layout = self.dataArray[indexPath.row];
+//    XLLayout *layout = self.dataArray[indexPath.row];
+    XLLayout *layout = [tableView cellOfLayoutForKey:[tableView cacheKeyWithIndexPath:indexPath]];
+//    NSLog(@"======= %f",layout.cellHeight);
+    
     return layout.cellHeight;
 }
 

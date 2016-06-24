@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@class XLLayout;
 
 @interface XLCellHeightCache : NSObject
 
@@ -15,13 +16,16 @@
 
 @interface UITableView (XLHeightCache)
 
-- (void)removeHeightCacheOfCellForKey:(NSString *)key;
-- (void)removeAllHeightCacheOfCell;
+- (void)removeLayoutCacheOfCellForKey:(NSString *)key;
+- (void)removeAllLayoutCacheOfCell;
 
-- (void)cacheCellHeight:(CGFloat)height forKey:(NSString *)key;
-- (CGFloat)heightOfCellForKey:(NSString *)key;
+- (void)cacheCellLayout:(XLLayout *)layout forKey:(NSString *)key;
+- (XLLayout *)cellOfLayoutForKey:(NSString *)key;
 
+- (NSString *)cacheKeyWithIndexPath:(NSIndexPath *)indexPath;
 
 @property (nonatomic, strong) NSMutableArray *precacheIndexArray;
+
+@property (nonatomic, copy) NSString *identify;
 
 @end

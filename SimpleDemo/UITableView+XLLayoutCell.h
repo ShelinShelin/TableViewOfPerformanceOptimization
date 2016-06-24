@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class XLLayout;
 
 @interface UITableView (XLLayoutCell)
 
-- (CGFloat)heightForLayoutCellWithKey:(NSString *)key;
+- (XLLayout *)layoutCellWithKey:(NSString *)key;
 
 @end
