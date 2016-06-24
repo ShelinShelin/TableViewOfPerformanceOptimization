@@ -54,7 +54,6 @@
 
 /**
  ==========================================================
- 
  ==========================================================
  */
 
@@ -85,10 +84,10 @@ static const char heightCacheKey;
     for (NSInteger section = 0; section < [self numberOfSections]; section ++) {
         for (NSInteger row = 0; row < [self numberOfRowsInSection:section]; row ++) {
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
-#warning 先判断缓存是否存在
+            
             if (![self cellOfLayoutForKey:[self cacheKeyWithIndexPath:indexPath]]) {
                 [allIndexPaths addObject:indexPath];
-            }
+            } 
         }
     }
     return allIndexPaths.copy;
@@ -184,14 +183,14 @@ static const char nameKey;
     objc_setAssociatedObject(self, &nameKey, precacheIndexArray, OBJC_ASSOCIATION_RETAIN);
 }
 
-static const char identify;
+static const char identifyKey;
 
 - (NSString *)identify {
-    return objc_getAssociatedObject(self, &identify);
+    return objc_getAssociatedObject(self, &identifyKey);
 }
 
 - (void)setIdentify:(NSString *)identify {
-    objc_setAssociatedObject(self, &identify, identify, OBJC_ASSOCIATION_COPY_NONATOMIC);
+    objc_setAssociatedObject(self, &identifyKey, identify, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
 @end

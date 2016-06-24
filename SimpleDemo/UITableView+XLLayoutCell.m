@@ -8,13 +8,22 @@
 
 #import "UITableView+XLLayoutCell.h"
 #import "UITableView+XLHeightCache.h"
+#import "XLLayout.h"
 
 @implementation UITableView (XLLayoutCell)
 
-- (XLLayout *)layoutCellWithKey:(NSString *)key {
+- (XLLayout *)layoutCellWithKey:(NSString *)key indexPath:(NSIndexPath *)indexPath {
     if (key.length == 0) return 0;
     
-    return [self cellOfLayoutForKey:key];
+    if ([self cellOfLayoutForKey:key].cellHeight) {
+        return [self cellOfLayoutForKey:key];
+    }
+    
+    XLLayout *layout = self.precacheIndexArray[indexPath.row];
+    [layout layoutCalculate];
+    [self cacheCellLayout:layout forKey:[self cacheKeyWithIndexPath:indexPath]];
+    
+    return layout;
 }
 
 @end

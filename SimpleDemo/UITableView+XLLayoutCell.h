@@ -11,6 +11,6 @@
 
 @interface UITableView (XLLayoutCell)
 
-- (XLLayout *)layoutCellWithKey:(NSString *)key;
+- (XLLayout *)layoutCellWithKey:(NSString *)key indexPath:(NSIndexPath *)indexPath;
 
 @end

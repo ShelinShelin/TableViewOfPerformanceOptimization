@@ -12,6 +12,7 @@
 #import "XLItem.h"
 #import "XLLayout.h"
 #import "UITableView+XLHeightCache.h"
+#import "UITableView+XLLayoutCell.h"
 
 @interface XLFeedListViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -74,17 +75,15 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     XLMyCell *cell = [XLMyCell myCellWithTableView:tableView];
-//    XLLayout *layout = self.dataArray[indexPath.row];
     
-    XLLayout *layout = [tableView cellOfLayoutForKey:[tableView cacheKeyWithIndexPath:indexPath]];
+    XLLayout *layout = [tableView layoutCellWithKey:[tableView cacheKeyWithIndexPath:indexPath] indexPath:indexPath];
     cell.layout = layout;
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    XLLayout *layout = self.dataArray[indexPath.row];
-    XLLayout *layout = [tableView cellOfLayoutForKey:[tableView cacheKeyWithIndexPath:indexPath]];
-//    NSLog(@"======= %f",layout.cellHeight);
+    
+    XLLayout *layout = [tableView layoutCellWithKey:[tableView cacheKeyWithIndexPath:indexPath] indexPath:indexPath];
     
     return layout.cellHeight;
 }
