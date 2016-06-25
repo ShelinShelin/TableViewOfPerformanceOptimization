@@ -80,8 +80,8 @@
 
 - (void)myReloadData {
     [self myReloadData];
-    //add pre caches
-    [self precacheIfNeeded];
+    //register runloop observer]
+    [self registerRunloopObserver];
 }
 
 /**
@@ -103,17 +103,11 @@
     return allIndexPaths.copy;
 }
 
-- (void)precacheIfNeeded {
-    if (![self.delegate respondsToSelector:@selector(tableView:heightForRowAtIndexPath:)]) {
-        return;
-    }
-    [self registerRunloopObserver];
-}
-
 /**
  *  add runloop observer, calculate the layout in runloop spare time
  */
 - (void)registerRunloopObserver {
+    if (![self.delegate respondsToSelector:@selector(tableView:heightForRowAtIndexPath:)]) return;
     
     NSMutableArray *indexPathsToBePrecachedArray = self.allIndexPathsToBePrecached.mutableCopy;
     
@@ -147,7 +141,6 @@
     XLLayout *layout = self.precacheLayoutArray[indexPath.row];
     [layout layoutCalculate];
     
-    //缓存高度
     [self cacheCellLayout:layout forKey:[self cacheKeyWithIndexPath:indexPath]];
 }
 

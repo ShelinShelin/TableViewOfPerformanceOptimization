@@ -19,6 +19,7 @@
 #define TEXT_COLOR [UIColor colorWithRed:0.72f green:0.72f blue:0.72f alpha:1.0f]
 #define MID_TEXT_FONT [UIFont systemFontOfSize:14.0f]
 #define IMAGE_SIZE (SCREEN_WIDTH - 40) / 3.0
+#define BG_COLOR [UIColor colorWithRed:0.96f green:0.96f blue:0.96f alpha:1.00f]
 
 @interface XLLayout : NSObject
 
@@ -30,6 +31,9 @@
 @property (nonatomic, assign, readonly) CGRect statusLayout;
 @property (nonatomic, assign, readonly) CGRect imagesLayout;
 @property (nonatomic, assign, readonly) CGRect toolBarLayout;
+@property (nonatomic, assign, readonly) CGRect composeLayout;
+@property (nonatomic, assign, readonly) CGRect commentLayout;
+@property (nonatomic, assign, readonly) CGRect likeLayout;
 @property (nonatomic, assign, readonly) CGRect postBgLayout;
 
 @property (nonatomic, strong) XLItem *item;

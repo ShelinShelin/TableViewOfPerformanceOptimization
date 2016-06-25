@@ -30,7 +30,9 @@
 
 - (void)addRunloopTask:(XLRunloopTask)runloopTask {
     if (!runloopTask) return;
-    [self.runloopTaskArray addObject:runloopTask];
+    @synchronized (self) {
+        [self.runloopTaskArray addObject:runloopTask];
+    }
 }
 
 - (void)removeAllRunloopTask {
@@ -46,7 +48,7 @@
     CFRunLoopObserverRef defaultModeObserver = CFRunLoopObserverCreateWithHandler(kCFAllocatorDefault, kCFRunLoopBeforeWaiting, true, 0, ^(CFRunLoopObserverRef observer, CFRunLoopActivity activity) {
         
         if (!manager.runloopTaskArray.count) return;
-        
+    
         [self performSelector:@selector(defaultModeRunLoopCallBack:)
                      onThread:[NSThread mainThread]
                    withObject:manager
@@ -62,15 +64,13 @@
 /**
  *  runloop call back
  */
-- (void)defaultModeRunLoopCallBack:(XLRunloopTaskManager *)manager {
-    
-    BOOL rendering = NO;
-    if (rendering) return;
++ (void)defaultModeRunLoopCallBack:(XLRunloopTaskManager *)manager {
     
     XLRunloopTask runloopTask = manager.runloopTaskArray.firstObject;
-    rendering = runloopTask();
-    [manager.runloopTaskArray removeObjectAtIndex:0];
-    
+    runloopTask();
+    @synchronized (self) {
+        [manager.runloopTaskArray removeObjectAtIndex:0];
+    }
 }
 
 #pragma mark - init

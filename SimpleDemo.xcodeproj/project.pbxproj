@@ -14,6 +14,8 @@
 		FD4273191D1C1A4D00EB8F46 /* UITableView+XLLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD4273181D1C1A4D00EB8F46 /* UITableView+XLLayoutCell.m */; };
 		FD42731C1D1C1CD200EB8F46 /* UITableView+XLHeightCache.m in Sources */ = {isa = PBXBuildFile; fileRef = FD42731B1D1C1CD200EB8F46 /* UITableView+XLHeightCache.m */; };
 		FD42731F1D1E144700EB8F46 /* XLRunloopTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD42731E1D1E144700EB8F46 /* XLRunloopTaskManager.m */; };
+		FD4273211D1E2F2E00EB8F46 /* ImageResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FD4273201D1E2F2E00EB8F46 /* ImageResources.bundle */; };
+		FD4273231D1E505100EB8F46 /* bg_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD4273221D1E505100EB8F46 /* bg_image.jpg */; };
 		FD5E119F1D124A8200F04834 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5E119E1D124A8200F04834 /* main.m */; };
 		FD5E11A21D124A8200F04834 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5E11A11D124A8200F04834 /* AppDelegate.m */; };
 		FD5E11A51D124A8200F04834 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5E11A41D124A8200F04834 /* ViewController.m */; };
@@ -66,6 +68,8 @@
 		FD42731B1D1C1CD200EB8F46 /* UITableView+XLHeightCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+XLHeightCache.m"; sourceTree = "<group>"; };
 		FD42731D1D1E144700EB8F46 /* XLRunloopTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLRunloopTaskManager.h; sourceTree = "<group>"; };
 		FD42731E1D1E144700EB8F46 /* XLRunloopTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLRunloopTaskManager.m; sourceTree = "<group>"; };
+		FD4273201D1E2F2E00EB8F46 /* ImageResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ImageResources.bundle; sourceTree = "<group>"; };
+		FD4273221D1E505100EB8F46 /* bg_image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg_image.jpg; sourceTree = "<group>"; };
 		FD5E119A1D124A8200F04834 /* SimpleDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD5E119E1D124A8200F04834 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FD5E11A01D124A8200F04834 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -214,8 +218,10 @@
 		FD5E119D1D124A8200F04834 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				FD4273201D1E2F2E00EB8F46 /* ImageResources.bundle */,
 				FD7E64111D1AB60E00DD054A /* feedlist.json */,
 				FD7E64161D1AC43C00DD054A /* shelin.jpg */,
+				FD4273221D1E505100EB8F46 /* bg_image.jpg */,
 				FD5E11A31D124A8200F04834 /* ViewController.h */,
 				FD5E11A41D124A8200F04834 /* ViewController.m */,
 				FD5E11A61D124A8200F04834 /* Main.storyboard */,
@@ -312,6 +318,7 @@
 				TargetAttributes = {
 					FD5E11991D124A8200F04834 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 6J2XGE456D;
 					};
 					FD5E11B21D124A8200F04834 = {
 						CreatedOnToolsVersion = 7.3;
@@ -349,10 +356,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD7E64121D1AB60E00DD054A /* feedlist.json in Resources */,
+				FD4273231D1E505100EB8F46 /* bg_image.jpg in Resources */,
 				FD5E11AD1D124A8200F04834 /* LaunchScreen.storyboard in Resources */,
 				FD5E11AA1D124A8200F04834 /* Assets.xcassets in Resources */,
 				FD7E64171D1AC43C00DD054A /* shelin.jpg in Resources */,
 				FD5E11A81D124A8200F04834 /* Main.storyboard in Resources */,
+				FD4273211D1E2F2E00EB8F46 /* ImageResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -535,6 +544,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = SimpleDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.shelin.SimpleDemo;
@@ -546,6 +556,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = SimpleDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.shelin.SimpleDemo;

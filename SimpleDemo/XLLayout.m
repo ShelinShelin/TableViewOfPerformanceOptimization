@@ -10,7 +10,6 @@
 #import "XLItem.h"
 #import "NSAttributedString+XLAdd.h"
 #import "NSString+XLAdd.h"
-//#import "UIView+XLAdd.h"
 
 @implementation XLLayout
 
@@ -67,6 +66,15 @@
     
     //tool bar layot
     _toolBarLayout = CGRectMake(MARGIN, CGRectGetMaxY(_imagesLayout) + MARGIN, SCREEN_WIDTH - 2 * MARGIN, 44);
+    
+    CGFloat spacing = (SCREEN_WIDTH - 3 * 30) / 4.0;
+    
+    _composeLayout = CGRectMake(spacing, _toolBarLayout.origin.y, 30, 30);
+    
+    _commentLayout = CGRectMake(spacing * 2 + 30, _toolBarLayout.origin.y, 30, 30);
+    
+    _likeLayout = CGRectMake(spacing * 3 + 60, _toolBarLayout.origin.y, 30, 30);
+    
 }
 
 - (void)setItem:(XLItem *)item {
@@ -80,7 +88,7 @@
 }
 
 - (CGRect)postBgLayout {
-    return CGRectMake(0, 0, SCREEN_WIDTH, self.cellHeight);
+    return CGRectMake(0, 0, SCREEN_WIDTH, self.cellHeight - MARGIN);
 }
 
 @end

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef BOOL (^XLRunloopTask)(void);
+typedef void (^XLRunloopTask)(void);
 
 @interface XLRunloopTaskManager : NSObject
 

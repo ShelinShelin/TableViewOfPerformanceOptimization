@@ -11,6 +11,7 @@
 #import "XLLayout.h"
 #import "XLItem.h"
 #import "UIView+XLAdd.h"
+#import "XLRunloopTaskManager.h"
 
 @interface XLMyCell () {
     BOOL _isDrawing;
@@ -49,7 +50,7 @@
         [self.contentView addSubview:self.avatarView];
         
         self.statusLabel = [[XLLabel alloc] init];
-        self.statusLabel.textColor = [UIColor lightGrayColor];
+        self.statusLabel.textColor = BG_COLOR;
         self.statusLabel.frame = CGRectMake(CGRectGetMaxX(_imageView.frame) + 10, 10, [UIScreen mainScreen].bounds.size.width - CGRectGetWidth(_imageView.frame) - 30, CGRectGetHeight(_imageView.frame));
         
         [self.contentView addSubview:self.statusLabel];
@@ -57,10 +58,10 @@
         self.imageArray = [NSMutableArray arrayWithCapacity:9];
         for (int i = 0; i < 3; i ++) {
             UIImageView *imageView = [[UIImageView alloc] init];
+            imageView.backgroundColor = [UIColor lightGrayColor];
             [self.imageArray addObject:imageView];
+            [self.contentView addSubview:imageView];
         }
-        
-        
     }
     return self;
 }
@@ -82,16 +83,22 @@
     //label
     self.statusLabel.frame = layout.statusLayout;
     NSMutableAttributedString *muAttrStr = [[NSMutableAttributedString alloc] initWithString:item.status];
-    [muAttrStr addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, muAttrStr.length)];
+    [muAttrStr addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, muAttrStr.length)];
     [muAttrStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14.0f] range:NSMakeRange(0, muAttrStr.length)];
     self.statusLabel.attrText = muAttrStr;
     
     for (int i = 0; i < 3; i ++)  {
         UIImageView *imageView = self.imageArray[i];
         imageView.frame = CGRectMake(i * (IMAGE_SIZE + MARGIN) + MARGIN, CGRectGetMaxY(layout.statusLayout) + MARGIN, IMAGE_SIZE, IMAGE_SIZE);
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"bg_image" ofType:@"jpg"];
-        imageView.image = [UIImage imageWithContentsOfFile:filePath];
-        [self.contentView addSubview:imageView];
+        
+        imageView.image = nil;
+        XLRunloopTask task =  ^ {
+            NSString *filePath = [[NSBundle mainBundle] pathForResource:item.images[i] ofType:nil];
+            imageView.image = [UIImage imageWithContentsOfFile:filePath];
+            NSLog(@"-- setting images --");
+        };
+        
+        [[XLRunloopTaskManager sharedRunLoopTaskManager] addRunloopTask:task];
     }
 
     [self draw];
@@ -109,17 +116,23 @@
         UIGraphicsBeginImageContextWithOptions(_layout.postBgLayout.size, YES, 0);
         
         CGContextRef context = UIGraphicsGetCurrentContext();
-        [[UIColor yellowColor] set];
+        [BG_COLOR set];
         CGContextFillRect(context, _layout.postBgLayout);
         
         //user name
         [item.userName drawInRect:_layout.userNameLayout withAttributes:@{NSFontAttributeName : TEXT_FONT}];
         
         //from
-        [item.from drawInRect:_layout.fromLayout withAttributes:@{NSFontAttributeName : MID_TEXT_FONT}];
+        [item.from drawInRect:_layout.fromLayout withAttributes:@{NSFontAttributeName : MID_TEXT_FONT, NSForegroundColorAttributeName : TEXT_COLOR}];
         
         //public time
-        [item.publicTime drawInRect:_layout.publicTimeLayout withAttributes:@{NSFontAttributeName : MID_TEXT_FONT}];
+        [item.publicTime drawInRect:_layout.publicTimeLayout withAttributes:@{NSFontAttributeName : MID_TEXT_FONT, NSForegroundColorAttributeName : TEXT_COLOR}];
+        
+        [[UIImage imageNamed:@"ImageResources.bundle/timeline_icon_retweet"] drawInRect:_layout.composeLayout blendMode:kCGBlendModeNormal alpha:1.0f];
+        
+        [[UIImage imageNamed:@"ImageResources.bundle/timeline_icon_comment"] drawInRect:_layout.commentLayout blendMode:kCGBlendModeNormal alpha:1.0f];
+        
+        [[UIImage imageNamed:@"ImageResources.bundle/timeline_icon_unlike"] drawInRect:_layout.likeLayout blendMode:kCGBlendModeNormal alpha:1.0f];
         
         UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
         
