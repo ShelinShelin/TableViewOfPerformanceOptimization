@@ -13,6 +13,7 @@
 		FD3DBE1E1D1A8D53003F1184 /* UIView+XLAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3DBE1D1D1A8D53003F1184 /* UIView+XLAdd.m */; };
 		FD4273191D1C1A4D00EB8F46 /* UITableView+XLLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD4273181D1C1A4D00EB8F46 /* UITableView+XLLayoutCell.m */; };
 		FD42731C1D1C1CD200EB8F46 /* UITableView+XLHeightCache.m in Sources */ = {isa = PBXBuildFile; fileRef = FD42731B1D1C1CD200EB8F46 /* UITableView+XLHeightCache.m */; };
+		FD42731F1D1E144700EB8F46 /* XLRunloopTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD42731E1D1E144700EB8F46 /* XLRunloopTaskManager.m */; };
 		FD5E119F1D124A8200F04834 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5E119E1D124A8200F04834 /* main.m */; };
 		FD5E11A21D124A8200F04834 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5E11A11D124A8200F04834 /* AppDelegate.m */; };
 		FD5E11A51D124A8200F04834 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5E11A41D124A8200F04834 /* ViewController.m */; };
@@ -63,6 +64,8 @@
 		FD4273181D1C1A4D00EB8F46 /* UITableView+XLLayoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+XLLayoutCell.m"; sourceTree = "<group>"; };
 		FD42731A1D1C1CD200EB8F46 /* UITableView+XLHeightCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+XLHeightCache.h"; sourceTree = "<group>"; };
 		FD42731B1D1C1CD200EB8F46 /* UITableView+XLHeightCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+XLHeightCache.m"; sourceTree = "<group>"; };
+		FD42731D1D1E144700EB8F46 /* XLRunloopTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLRunloopTaskManager.h; sourceTree = "<group>"; };
+		FD42731E1D1E144700EB8F46 /* XLRunloopTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLRunloopTaskManager.m; sourceTree = "<group>"; };
 		FD5E119A1D124A8200F04834 /* SimpleDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD5E119E1D124A8200F04834 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FD5E11A01D124A8200F04834 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -150,6 +153,8 @@
 				FD42731B1D1C1CD200EB8F46 /* UITableView+XLHeightCache.m */,
 				FD4273171D1C1A4D00EB8F46 /* UITableView+XLLayoutCell.h */,
 				FD4273181D1C1A4D00EB8F46 /* UITableView+XLLayoutCell.m */,
+				FD42731D1D1E144700EB8F46 /* XLRunloopTaskManager.h */,
+				FD42731E1D1E144700EB8F46 /* XLRunloopTaskManager.m */,
 			);
 			name = Supporting;
 			sourceTree = "<group>";
@@ -382,6 +387,7 @@
 				FD5E11A21D124A8200F04834 /* AppDelegate.m in Sources */,
 				FD42731C1D1C1CD200EB8F46 /* UITableView+XLHeightCache.m in Sources */,
 				FD3DBE1A1D1A8AEF003F1184 /* XLLayout.m in Sources */,
+				FD42731F1D1E144700EB8F46 /* XLRunloopTaskManager.m in Sources */,
 				FD5E11D81D124C5D00F04834 /* XLTableView.m in Sources */,
 				FD5E119F1D124A8200F04834 /* main.m in Sources */,
 				FDFB61931D1B9055004251B3 /* NSString+XLAdd.m in Sources */,

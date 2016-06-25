@@ -84,8 +84,6 @@
     [self precacheIfNeeded];
 }
 
-static const char heightCacheKey;
-
 /**
  *  tableView all indexPath to be cache
  */
@@ -109,13 +107,13 @@ static const char heightCacheKey;
     if (![self.delegate respondsToSelector:@selector(tableView:heightForRowAtIndexPath:)]) {
         return;
     }
-    [self addRunloopObserver];
+    [self registerRunloopObserver];
 }
 
 /**
  *  add runloop observer, calculate the layout in runloop spare time
  */
-- (void)addRunloopObserver {
+- (void)registerRunloopObserver {
     
     NSMutableArray *indexPathsToBePrecachedArray = self.allIndexPathsToBePrecached.mutableCopy;
     
@@ -179,6 +177,8 @@ static const char heightCacheKey;
 
 #pragma mark - getter setter
 
+static const char heightCacheKey;
+
 - (XLCellLayoutCache *)celllayoutCache {
     XLCellLayoutCache *cache = objc_getAssociatedObject(self, &heightCacheKey);
     
@@ -190,24 +190,21 @@ static const char heightCacheKey;
     return cache;
 }
 
-static const char nameKey;
 
 - (NSMutableArray *)precacheLayoutArray {
-    return objc_getAssociatedObject(self, &nameKey);
+    return objc_getAssociatedObject(self, @selector(precacheLayoutArray));
 }
 
 - (void)setPrecacheLayoutArray:(NSMutableArray *)precacheLayoutArray {
-    objc_setAssociatedObject(self, &nameKey, precacheLayoutArray, OBJC_ASSOCIATION_RETAIN);
+    objc_setAssociatedObject(self, @selector(precacheLayoutArray), precacheLayoutArray, OBJC_ASSOCIATION_RETAIN);
 }
 
-static const char identifyKey;
-
 - (NSString *)identify {
-    return objc_getAssociatedObject(self, &identifyKey);
+    return objc_getAssociatedObject(self, @selector(identify));
 }
 
 - (void)setIdentify:(NSString *)identify {
-    objc_setAssociatedObject(self, &identifyKey, identify, OBJC_ASSOCIATION_COPY_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(identify), identify, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
 @end

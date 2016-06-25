@@ -7,7 +7,6 @@
 //
 
 #import "UITableView+XLLayoutCell.h"
-#import "UITableView+XLHeightCache.h"
 #import "XLLayout.h"
 
 @implementation UITableView (XLLayoutCell)

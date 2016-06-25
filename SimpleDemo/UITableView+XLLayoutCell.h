@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UITableView+XLHeightCache.h"
 @class XLLayout;
 
 @interface UITableView (XLLayoutCell)

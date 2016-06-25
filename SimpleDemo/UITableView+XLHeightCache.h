@@ -20,6 +20,10 @@
 - (void)cacheCellLayout:(XLLayout *)layout forKey:(NSString *)key;
 - (XLLayout *)cellOfLayoutForKey:(NSString *)key;
 
+
+/**
+ *  key for caches
+ */
 - (NSString *)cacheKeyWithIndexPath:(NSIndexPath *)indexPath;
 
 /**
