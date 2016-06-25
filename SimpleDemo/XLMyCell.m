@@ -11,7 +11,6 @@
 #import "XLLayout.h"
 #import "XLItem.h"
 #import "UIView+XLAdd.h"
-#import "XLRunloopTaskManager.h"
 
 @interface XLMyCell () {
     BOOL _isDrawing;
@@ -50,7 +49,7 @@
         [self.contentView addSubview:self.avatarView];
         
         self.statusLabel = [[XLLabel alloc] init];
-        self.statusLabel.textColor = BG_COLOR;
+        self.statusLabel.textBgColor = BG_COLOR;
         self.statusLabel.frame = CGRectMake(CGRectGetMaxX(_imageView.frame) + 10, 10, [UIScreen mainScreen].bounds.size.width - CGRectGetWidth(_imageView.frame) - 30, CGRectGetHeight(_imageView.frame));
         
         [self.contentView addSubview:self.statusLabel];
@@ -87,26 +86,15 @@
     [muAttrStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14.0f] range:NSMakeRange(0, muAttrStr.length)];
     self.statusLabel.attrText = muAttrStr;
     
-    for (int i = 0; i < 3; i ++)  {
-        UIImageView *imageView = self.imageArray[i];
-        imageView.frame = CGRectMake(i * (IMAGE_SIZE + MARGIN) + MARGIN, CGRectGetMaxY(layout.statusLayout) + MARGIN, IMAGE_SIZE, IMAGE_SIZE);
-        
-        imageView.image = nil;
-        XLRunloopTask task =  ^ {
-            NSString *filePath = [[NSBundle mainBundle] pathForResource:item.images[i] ofType:nil];
-            imageView.image = [UIImage imageWithContentsOfFile:filePath];
-            NSLog(@"-- setting images --");
-        };
-        
-        [[XLRunloopTaskManager sharedRunLoopTaskManager] addRunloopTask:task];
-    }
-
+    [self drawImages];
     [self draw];
 }
 
 - (void)draw {
     
     if (_isDrawing) return;
+    
+    self.postBgView.image = nil;
     
     XLItem *item = _layout.item;
     
@@ -117,6 +105,7 @@
         
         CGContextRef context = UIGraphicsGetCurrentContext();
         [BG_COLOR set];
+        CGContextStrokeRect(context, _layout.postBgLayout);
         CGContextFillRect(context, _layout.postBgLayout);
         
         //user name
@@ -144,6 +133,39 @@
             _isDrawing = NO;
         });
     });
+}
+
+- (void)drawImages {
+    
+    XLItem *item = _layout.item;
+    
+    for (int i = 0; i < 3; i ++)  {
+        UIImageView *imageView = self.imageArray[i];
+        imageView.frame = CGRectMake(i * (IMAGE_SIZE + MARGIN) + MARGIN, CGRectGetMaxY(_layout.statusLayout) + MARGIN, IMAGE_SIZE, IMAGE_SIZE);
+        
+        imageView.image = nil;
+        
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                
+                UIGraphicsBeginImageContextWithOptions(imageView.frame.size, YES, 0);
+                
+                CGContextRef context = UIGraphicsGetCurrentContext();
+                CGContextFillRect(context, imageView.frame);
+                CGContextStrokeRect(context, imageView.frame);
+                NSString *filePath = [[NSBundle mainBundle] pathForResource:item.images[i] ofType:nil];
+                UIImage *image = [UIImage imageWithContentsOfFile:filePath];
+                [image drawInRect:CGRectMake(0, 0, imageView.frame.size.width, imageView.frame.size.height) blendMode:kCGBlendModeNormal alpha:1.0f];
+            
+                UIImage *temp = UIGraphicsGetImageFromCurrentImageContext();
+                
+                UIGraphicsEndImageContext();
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    imageView.image = temp;
+                
+                });
+            });
+    }
 }
 
 

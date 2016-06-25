@@ -11,7 +11,7 @@
 @interface XLLabel : UIView
 
 @property (nonatomic, copy) NSAttributedString *attrText;
-@property (nonatomic, strong) UIColor *textColor;
+@property (nonatomic, strong) UIColor *textBgColor;
 
 @end
 

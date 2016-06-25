@@ -14,8 +14,8 @@
 - (XLLayout *)layoutCellWithKey:(NSString *)key indexPath:(NSIndexPath *)indexPath {
     if (key.length == 0) return 0;
     
-    if ([self cellOfLayoutForKey:key].cellHeight) {
-        return [self cellOfLayoutForKey:key];
+    if ([self layoutCellForKey:key].cellHeight) {
+        return [self layoutCellForKey:key];
     }
     
     XLLayout *layout = self.precacheLayoutArray[indexPath.row];

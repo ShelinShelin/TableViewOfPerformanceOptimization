@@ -68,6 +68,7 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+//    NSLog(@"-- %ld", self.dataArray.count);
     return self.dataArray.count;
 }
 
@@ -76,13 +77,14 @@
     XLMyCell *cell = [XLMyCell myCellWithTableView:tableView];
     XLLayout *layout = [tableView layoutCellWithKey:[tableView cacheKeyWithIndexPath:indexPath] indexPath:indexPath];
     cell.layout = layout;
+//    cell.layout = (XLLayout *)self.dataArray[indexPath.row];
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     XLLayout *layout = [tableView layoutCellWithKey:[tableView cacheKeyWithIndexPath:indexPath] indexPath:indexPath];
-    
+//    XLLayout *layout = (XLLayout *)self.dataArray[indexPath.row];
     return layout.cellHeight;
 }
 

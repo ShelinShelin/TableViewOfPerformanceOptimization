@@ -18,7 +18,7 @@
 - (void)removeLayoutCacheOfCellForKey:(NSString *)key;
 - (void)removeAllLayoutCacheOfCell;
 - (void)cacheCellLayout:(XLLayout *)layout forKey:(NSString *)key;
-- (XLLayout *)cellOfLayoutForKey:(NSString *)key;
+- (XLLayout *)layoutCellForKey:(NSString *)key;
 
 
 /**

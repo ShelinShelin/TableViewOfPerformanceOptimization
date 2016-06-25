@@ -15,7 +15,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _textColor = [UIColor whiteColor];
+        _textBgColor = [UIColor whiteColor];
         _bgImageView = [[UIImageView alloc] init];
         [self addSubview:_bgImageView];
     }
@@ -33,16 +33,18 @@
         return;
     }
     _attrText = attrText;
+    _bgImageView.image = nil;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         UIGraphicsBeginImageContextWithOptions(self.frame.size, YES, 0);
         
         CGContextRef context = UIGraphicsGetCurrentContext();
+        [_textBgColor set];
         
-        [_textColor set];
-        
+        CGContextStrokeRect(context, self.bounds);
         CGContextFillRect(context, self.bounds);
+        
         
         [attrText drawInRect:self.bounds];
         

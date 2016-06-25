@@ -13,7 +13,11 @@
 
 @implementation XLLayout
 
+static int i = 0;
+
 - (void)layoutCalculate {
+    
+//    NSLog(@"layoutCalculate - %d", i++);
     //iconView layout
     
     _iconLayout = CGRectMake(MARGIN, MARGIN, ICON_SIZE, ICON_SIZE);

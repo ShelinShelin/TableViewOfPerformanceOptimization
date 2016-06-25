@@ -88,14 +88,15 @@
  *  tableView all indexPath to be cache
  */
 - (NSArray *)allIndexPathsToBePrecached {
-    
+//    NSLog(@"-- %ld -- %ld ", [self numberOfSections], [self numberOfRowsInSection:0]);
     NSMutableArray *allIndexPaths = @[].mutableCopy;
+
     for (NSInteger section = 0; section < [self numberOfSections]; section ++) {
         for (NSInteger row = 0; row < [self numberOfRowsInSection:section]; row ++) {
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
 
             //When the layout cache is does not exist
-            if (![self cellOfLayoutForKey:[self cacheKeyWithIndexPath:indexPath]]) {
+            if (![self layoutCellForKey:[self cacheKeyWithIndexPath:indexPath]]) {
                 [allIndexPaths addObject:indexPath];
             } 
         }
@@ -110,7 +111,7 @@
     if (![self.delegate respondsToSelector:@selector(tableView:heightForRowAtIndexPath:)]) return;
     
     NSMutableArray *indexPathsToBePrecachedArray = self.allIndexPathsToBePrecached.mutableCopy;
-    
+//    NSLog(@"-- %ld", indexPathsToBePrecachedArray.count);
     CFRunLoopRef runloop = CFRunLoopGetCurrent();
     CFRunLoopObserverRef defaultModeObserver = CFRunLoopObserverCreateWithHandler(kCFAllocatorDefault, kCFRunLoopBeforeWaiting, true, 0, ^(CFRunLoopObserverRef observer, CFRunLoopActivity _) {
         
@@ -164,7 +165,7 @@
     [self.celllayoutCache cacheLayout:layout forKey:key];
 }
 
-- (XLLayout *)cellOfLayoutForKey:(NSString *)key {
+- (XLLayout *)layoutCellForKey:(NSString *)key {
     return [self.celllayoutCache layoutForKey:key];
 }
 
@@ -183,21 +184,24 @@ static const char heightCacheKey;
     return cache;
 }
 
+static const char layoutKey;
 
 - (NSMutableArray *)precacheLayoutArray {
-    return objc_getAssociatedObject(self, @selector(precacheLayoutArray));
+    return objc_getAssociatedObject(self, &layoutKey);
 }
 
 - (void)setPrecacheLayoutArray:(NSMutableArray *)precacheLayoutArray {
-    objc_setAssociatedObject(self, @selector(precacheLayoutArray), precacheLayoutArray, OBJC_ASSOCIATION_RETAIN);
+    objc_setAssociatedObject(self, &layoutKey, precacheLayoutArray, OBJC_ASSOCIATION_RETAIN);
 }
 
+static const char identifyKey;
+
 - (NSString *)identify {
-    return objc_getAssociatedObject(self, @selector(identify));
+    return objc_getAssociatedObject(self, &identifyKey);
 }
 
 - (void)setIdentify:(NSString *)identify {
-    objc_setAssociatedObject(self, @selector(identify), identify, OBJC_ASSOCIATION_COPY_NONATOMIC);
+    objc_setAssociatedObject(self, &identifyKey, identify, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
 @end
