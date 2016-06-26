@@ -24,7 +24,7 @@
 /**
  *  key for caches
  */
-- (NSString *)cacheKeyWithIndexPath:(NSIndexPath *)indexPath;
+- (NSString *)cacheKey:(NSIndexPath *)indexPath;
 
 /**
  *  Use to store all the precache layout objects

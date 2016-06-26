@@ -29,6 +29,8 @@
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
+        NSMutableArray *array = [NSMutableArray arrayWithCapacity:10];
+        
         for (int i = 0; i < 5; i ++) {
             NSString *path = [[NSBundle mainBundle] pathForResource:@"feedlist" ofType:@"json"];
             NSData *data = [NSData dataWithContentsOfFile:path];
@@ -43,8 +45,10 @@
                 layout.item = item;
                 [tempArray addObject:layout];
             }
-            [self.dataArray addObjectsFromArray:tempArray];
+            [array addObjectsFromArray:tempArray];
         }
+        
+        self.dataArray = array.mutableCopy;
         dispatch_async(dispatch_get_main_queue(), ^{
             
             self.tableView.precacheLayoutArray = self.dataArray.copy;
@@ -53,29 +57,20 @@
     });
 }
 
-#pragma mark - lazy loading
-
-- (XLTableView *)tableView {
-    if (!_tableView) {
-        _tableView = [[XLTableView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        _tableView.identify = @"XLCell";
-    }
-    return _tableView;
-}
-
 #pragma mark - UITableViewDataSource
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    NSLog(@"-- %ld", self.dataArray.count);
     return self.dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     XLMyCell *cell = [XLMyCell myCellWithTableView:tableView];
-    XLLayout *layout = [tableView layoutCellWithKey:[tableView cacheKeyWithIndexPath:indexPath] indexPath:indexPath];
+    XLLayout *layout = [tableView layoutCellWithKey:[tableView cacheKey:indexPath] indexPath:indexPath];
     cell.layout = layout;
 //    cell.layout = (XLLayout *)self.dataArray[indexPath.row];
     return cell;
@@ -83,7 +78,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    XLLayout *layout = [tableView layoutCellWithKey:[tableView cacheKeyWithIndexPath:indexPath] indexPath:indexPath];
+    XLLayout *layout = [tableView layoutCellWithKey:[tableView cacheKey:indexPath] indexPath:indexPath];
 //    XLLayout *layout = (XLLayout *)self.dataArray[indexPath.row];
     return layout.cellHeight;
 }
@@ -95,6 +90,16 @@
         _dataArray = @[].mutableCopy;
     }
     return _dataArray;
+}
+
+- (XLTableView *)tableView {
+    if (!_tableView) {
+        _tableView = [[XLTableView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.identify = @"XLCell";
+    }
+    return _tableView;
 }
 
 @end

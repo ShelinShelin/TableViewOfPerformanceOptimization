@@ -152,10 +152,15 @@
                 CGContextRef context = UIGraphicsGetCurrentContext();
                 CGContextFillRect(context, imageView.frame);
                 CGContextStrokeRect(context, imageView.frame);
+                
                 NSString *filePath = [[NSBundle mainBundle] pathForResource:item.images[i] ofType:nil];
                 UIImage *image = [UIImage imageWithContentsOfFile:filePath];
-                [image drawInRect:CGRectMake(0, 0, imageView.frame.size.width, imageView.frame.size.height) blendMode:kCGBlendModeNormal alpha:1.0f];
-            
+                
+                CGContextRotateCTM(context, M_PI);
+                CGContextScaleCTM(context, -1, 1);
+                CGContextTranslateCTM(context, 0, -imageView.frame.size.height);
+                CGContextDrawImage(context, CGRectMake(0, 0, imageView.frame.size.width, imageView.frame.size.height), image.CGImage);
+                
                 UIImage *temp = UIGraphicsGetImageFromCurrentImageContext();
                 
                 UIGraphicsEndImageContext();

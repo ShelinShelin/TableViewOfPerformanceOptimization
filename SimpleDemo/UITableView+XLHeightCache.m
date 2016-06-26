@@ -15,7 +15,7 @@
  XLCellHeightCache: Used to cache layout objects
  ==========================================================
  */
-
+static int i = 0;
 @interface XLCellLayoutCache ()
 
 @property (nonatomic, strong) NSCache *cellLayoutCache;
@@ -88,7 +88,7 @@
  *  tableView all indexPath to be cache
  */
 - (NSArray *)allIndexPathsToBePrecached {
-//    NSLog(@"-- %ld -- %ld ", [self numberOfSections], [self numberOfRowsInSection:0]);
+
     NSMutableArray *allIndexPaths = @[].mutableCopy;
 
     for (NSInteger section = 0; section < [self numberOfSections]; section ++) {
@@ -96,7 +96,7 @@
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
 
             //When the layout cache is does not exist
-            if (![self layoutCellForKey:[self cacheKeyWithIndexPath:indexPath]]) {
+            if (![self layoutCellForKey:[self cacheKey:indexPath]].cellHeight) {
                 [allIndexPaths addObject:indexPath];
             } 
         }
@@ -111,7 +111,7 @@
     if (![self.delegate respondsToSelector:@selector(tableView:heightForRowAtIndexPath:)]) return;
     
     NSMutableArray *indexPathsToBePrecachedArray = self.allIndexPathsToBePrecached.mutableCopy;
-//    NSLog(@"-- %ld", indexPathsToBePrecachedArray.count);
+//    NSLog(@"-- %ld", self.allIndexPathsToBePrecached.count);
     CFRunLoopRef runloop = CFRunLoopGetCurrent();
     CFRunLoopObserverRef defaultModeObserver = CFRunLoopObserverCreateWithHandler(kCFAllocatorDefault, kCFRunLoopBeforeWaiting, true, 0, ^(CFRunLoopObserverRef observer, CFRunLoopActivity _) {
         
@@ -141,13 +141,13 @@
     
     XLLayout *layout = self.precacheLayoutArray[indexPath.row];
     [layout layoutCalculate];
-    
-    [self cacheCellLayout:layout forKey:[self cacheKeyWithIndexPath:indexPath]];
+    NSLog(@"-- cellheight -- %d", i++);
+    [self cacheCellLayout:layout forKey:[self cacheKey:indexPath]];
 }
 
 #pragma mark - privite method
 
-- (NSString *)cacheKeyWithIndexPath:(NSIndexPath *)indexPath {
+- (NSString *)cacheKey:(NSIndexPath *)indexPath {
     return [NSString stringWithFormat:@"%@%ld", self.identify, [indexPath hash]];
 }
 
