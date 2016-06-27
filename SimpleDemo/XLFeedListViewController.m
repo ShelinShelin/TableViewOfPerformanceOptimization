@@ -11,7 +11,6 @@
 #import "XLMyCell.h"
 #import "XLItem.h"
 #import "XLLayout.h"
-#import "UITableView+XLLayoutCell.h"
 
 @interface XLFeedListViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -51,7 +50,6 @@
         self.dataArray = array.mutableCopy;
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            self.tableView.precacheLayoutArray = self.dataArray.copy;
             [self.tableView reloadData];
         });
     });
@@ -70,16 +68,15 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     XLMyCell *cell = [XLMyCell myCellWithTableView:tableView];
-    XLLayout *layout = [tableView layoutCellWithKey:[tableView cacheKey:indexPath] indexPath:indexPath];
+    XLLayout *layout = (XLLayout *)self.dataArray[indexPath.row];
+    
     cell.layout = layout;
-//    cell.layout = (XLLayout *)self.dataArray[indexPath.row];
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    XLLayout *layout = [tableView layoutCellWithKey:[tableView cacheKey:indexPath] indexPath:indexPath];
-//    XLLayout *layout = (XLLayout *)self.dataArray[indexPath.row];
+
+    XLLayout *layout = (XLLayout *)self.dataArray[indexPath.row];
     return layout.cellHeight;
 }
 
@@ -97,7 +94,6 @@
         _tableView = [[XLTableView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.identify = @"XLCell";
     }
     return _tableView;
 }

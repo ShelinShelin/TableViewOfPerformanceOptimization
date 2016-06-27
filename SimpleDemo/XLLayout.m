@@ -11,6 +11,8 @@
 #import "NSAttributedString+XLAdd.h"
 #import "NSString+XLAdd.h"
 
+static int k;
+
 @implementation XLLayout
 
 - (void)setItem:(XLItem *)item {
@@ -21,6 +23,90 @@
 }
 
 - (void)layoutCalculate {
+    NSLog(@"--- %d", k++);
+    
+    /*
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+
+        //iconView layout
+
+        CGRect iconLayout = CGRectMake(MARGIN, MARGIN, ICON_SIZE, ICON_SIZE);
+
+        //userName layout
+        CGSize userNameSize = [_item.userName sizeWithMaxWidth:MAXFLOAT font:TEXT_FONT];
+        CGRect userNameLayout = CGRectMake(CGRectGetMaxX(iconLayout) + MARGIN, MARGIN, userNameSize.width, userNameSize.height);
+
+        //from layout
+        CGSize fromSize = [_item.from sizeWithMaxWidth:MAXFLOAT font:MID_TEXT_FONT];
+        CGRect fromLayout = CGRectMake(userNameLayout.origin.x, CGRectGetMaxY(userNameLayout) + MARGIN / 2.0, fromSize.width, fromSize.height);
+
+        //public time
+        CGSize publicTimeSize = [_item.publicTime sizeWithMaxWidth:MAXFLOAT font:MID_TEXT_FONT];
+        CGRect publicTimeLayout = CGRectMake(CGRectGetMaxX(fromLayout) + MARGIN, fromLayout.origin.y, publicTimeSize.width, publicTimeSize.height);
+
+        //status layout
+        NSMutableAttributedString *muAttrStr = [[NSMutableAttributedString alloc] initWithString:_item.status];
+        [muAttrStr addAttribute:NSForegroundColorAttributeName value:TEXT_COLOR range:NSMakeRange(0, muAttrStr.length)];
+        [muAttrStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14.0f] range:NSMakeRange(0, muAttrStr.length)];
+
+        CGSize textSize = [muAttrStr boundingRectWithMaxWidh:(SCREEN_WIDTH - 2 * MARGIN)];
+        CGRect statusLayout = CGRectMake(MARGIN, CGRectGetMaxY(iconLayout) + MARGIN, textSize.width, textSize.height);
+
+        //images layout
+        CGSize imagesSize;
+        switch (_item.images.count) {
+            case 0:
+                imagesSize = CGSizeMake(0, 0);
+                break;
+            case 1:
+            case 2:
+            case 3:
+                imagesSize = CGSizeMake(SCREEN_WIDTH - 2 * MARGIN, IMAGE_SIZE);
+                break;
+            case 4:
+            case 5:
+            case 6:
+                imagesSize = CGSizeMake(SCREEN_WIDTH - 2 * MARGIN, IMAGE_SIZE * 2);
+                break;
+            case 7:
+            case 8:
+            case 9:
+                imagesSize = CGSizeMake(SCREEN_WIDTH - 2 * MARGIN, IMAGE_SIZE * 3);
+                break;
+            default:
+                break;
+        }
+        CGRect imagesLayout = CGRectMake(MARGIN, CGRectGetMaxY(statusLayout) + MARGIN, imagesSize.width, imagesSize.height);
+
+        //tool bar layot
+        CGRect toolBarLayout = CGRectMake(MARGIN, CGRectGetMaxY(imagesLayout) + MARGIN, SCREEN_WIDTH - 2 * MARGIN, 44);
+
+        CGFloat spacing = (SCREEN_WIDTH - 3 * 30) / 4.0;
+
+        CGRect composeLayout = CGRectMake(spacing, toolBarLayout.origin.y, 30, 30);
+
+        CGRect commentLayout = CGRectMake(spacing * 2 + 30, toolBarLayout.origin.y, 30, 30);
+
+        CGRect likeLayout = CGRectMake(spacing * 3 + 60, toolBarLayout.origin.y, 30, 30);
+
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _iconLayout = iconLayout;
+            _userNameLayout = userNameLayout;
+            _fromLayout = fromLayout;
+            _publicTimeLayout = publicTimeLayout;
+            _statusLayout = statusLayout;
+            _imagesLayout = imagesLayout;
+            _toolBarLayout = toolBarLayout;
+            _composeLayout = composeLayout;
+            _commentLayout = commentLayout;
+            _likeLayout = likeLayout;
+        
+        });
+    });
+    
+    */
+    
     
     //iconView layout
     
@@ -82,6 +168,7 @@
     _commentLayout = CGRectMake(spacing * 2 + 30, _toolBarLayout.origin.y, 30, 30);
     
     _likeLayout = CGRectMake(spacing * 3 + 60, _toolBarLayout.origin.y, 30, 30);
+    
 }
 
 - (CGFloat)cellHeight {

@@ -139,7 +139,7 @@
 - (void)precacheIndexPathIfNeeded:(NSIndexPath *)indexPath {
     
     XLLayout *layout = self.precacheLayoutArray[indexPath.row];
-    [layout layoutCalculate];
+//    [layout layoutCalculate];
     [self cacheCellLayout:layout forKey:[self cacheKey:indexPath]];
 }
 

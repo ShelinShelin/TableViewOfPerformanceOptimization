@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-@class XLItem;
+@class XLItem, XLLayout;
 
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
@@ -37,10 +37,5 @@
 @property (nonatomic, assign, readonly) CGRect postBgLayout;
 
 @property (nonatomic, strong) XLItem *item;
-
-/**
- *  calculate the layout
- */
-- (void)layoutCalculate;
 
 @end

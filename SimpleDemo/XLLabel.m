@@ -45,7 +45,6 @@
         CGContextStrokeRect(context, self.bounds);
         CGContextFillRect(context, self.bounds);
         
-        
         [attrText drawInRect:self.bounds];
         
         UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
