@@ -15,7 +15,7 @@
  XLCellHeightCache: Used to cache layout objects
  ==========================================================
  */
-static int i = 0;
+
 @interface XLCellLayoutCache ()
 
 @property (nonatomic, strong) NSCache *cellLayoutCache;
@@ -69,20 +69,20 @@ static int i = 0;
 /**
  *  exchange of reloadDataMethod and myReloadDataMethod
  */
-+ (void)load {
-    SEL reloadDataMethod = @selector(reloadData);
-    SEL myReloadDataMethod = @selector(myReloadData);
-    
-    Method originalMethod = class_getInstanceMethod(self, reloadDataMethod);
-    Method swizzledMethod = class_getInstanceMethod(self, myReloadDataMethod);
-    method_exchangeImplementations(originalMethod, swizzledMethod);
-}
-
-- (void)myReloadData {
-    [self myReloadData];
-    //register runloop observer]
-    [self registerRunloopObserver];
-}
+//+ (void)load {
+//    SEL reloadDataMethod = @selector(reloadData);
+//    SEL myReloadDataMethod = @selector(myReloadData);
+//    
+//    Method originalMethod = class_getInstanceMethod(self, reloadDataMethod);
+//    Method swizzledMethod = class_getInstanceMethod(self, myReloadDataMethod);
+//    method_exchangeImplementations(originalMethod, swizzledMethod);
+//}
+//
+//- (void)myReloadData {
+//    [self myReloadData];
+//    //register runloop observer]
+//    [self registerRunloopObserver];
+//}
 
 /**
  *  tableView all indexPath to be cache
@@ -107,32 +107,31 @@ static int i = 0;
 /**
  *  add runloop observer, calculate the layout in runloop spare time
  */
-- (void)registerRunloopObserver {
-    if (![self.delegate respondsToSelector:@selector(tableView:heightForRowAtIndexPath:)]) return;
-    
-    NSMutableArray *indexPathsToBePrecachedArray = self.allIndexPathsToBePrecached.mutableCopy;
-//    NSLog(@"-- %ld", self.allIndexPathsToBePrecached.count);
-    CFRunLoopRef runloop = CFRunLoopGetCurrent();
-    CFRunLoopObserverRef defaultModeObserver = CFRunLoopObserverCreateWithHandler(kCFAllocatorDefault, kCFRunLoopBeforeWaiting, true, 0, ^(CFRunLoopObserverRef observer, CFRunLoopActivity _) {
-        
-        if (indexPathsToBePrecachedArray.count == 0) {
-            CFRunLoopRemoveObserver(runloop, observer, kCFRunLoopDefaultMode);
-            CFRelease(observer);
-            return;
-        }
-        
-        NSIndexPath *indexPath = indexPathsToBePrecachedArray.firstObject;
-        [indexPathsToBePrecachedArray removeObject:indexPath];
-        
-        [self performSelector:@selector(precacheIndexPathIfNeeded:)
-                     onThread:[NSThread mainThread]
-                   withObject:indexPath
-                waitUntilDone:NO
-                        modes:@[NSDefaultRunLoopMode]];
-    });
-    
-    CFRunLoopAddObserver(runloop, defaultModeObserver, kCFRunLoopDefaultMode);
-}
+//- (void)registerRunloopObserver {
+//    if (![self.delegate respondsToSelector:@selector(tableView:heightForRowAtIndexPath:)]) return;
+//    
+//    NSMutableArray *indexPathsToBePrecachedArray = self.allIndexPathsToBePrecached.mutableCopy;
+//    CFRunLoopRef runloop = CFRunLoopGetCurrent();
+//    CFRunLoopObserverRef defaultModeObserver = CFRunLoopObserverCreateWithHandler(kCFAllocatorDefault, kCFRunLoopBeforeWaiting, true, 0, ^(CFRunLoopObserverRef observer, CFRunLoopActivity _) {
+//        
+//        if (indexPathsToBePrecachedArray.count == 0) {
+//            CFRunLoopRemoveObserver(runloop, observer, kCFRunLoopDefaultMode);
+//            CFRelease(observer);
+//            return;
+//        }
+//        
+//        NSIndexPath *indexPath = indexPathsToBePrecachedArray.firstObject;
+//        [indexPathsToBePrecachedArray removeObject:indexPath];
+//        
+//        [self performSelector:@selector(precacheIndexPathIfNeeded:)
+//                     onThread:[NSThread mainThread]
+//                   withObject:indexPath
+//                waitUntilDone:NO
+//                        modes:@[NSDefaultRunLoopMode]];
+//    });
+//    
+//    CFRunLoopAddObserver(runloop, defaultModeObserver, kCFRunLoopDefaultMode);
+//}
 
 /**
  *  calculatec pre cache cell height
@@ -141,7 +140,6 @@ static int i = 0;
     
     XLLayout *layout = self.precacheLayoutArray[indexPath.row];
     [layout layoutCalculate];
-    NSLog(@"-- cellheight -- %d", i++);
     [self cacheCellLayout:layout forKey:[self cacheKey:indexPath]];
 }
 
@@ -178,30 +176,26 @@ static const char heightCacheKey;
     
     if (cache == nil) {
         
-        cache = [[XLCellLayoutCache alloc]init];
+        cache = [[XLCellLayoutCache alloc] init];
         objc_setAssociatedObject(self, &heightCacheKey, cache, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     return cache;
 }
 
-static const char layoutKey;
-
 - (NSMutableArray *)precacheLayoutArray {
-    return objc_getAssociatedObject(self, &layoutKey);
+    return objc_getAssociatedObject(self, @selector(precacheLayoutArray));
 }
 
 - (void)setPrecacheLayoutArray:(NSMutableArray *)precacheLayoutArray {
-    objc_setAssociatedObject(self, &layoutKey, precacheLayoutArray, OBJC_ASSOCIATION_RETAIN);
+    objc_setAssociatedObject(self, @selector(precacheLayoutArray), precacheLayoutArray, OBJC_ASSOCIATION_RETAIN);
 }
 
-static const char identifyKey;
-
 - (NSString *)identify {
-    return objc_getAssociatedObject(self, &identifyKey);
+    return objc_getAssociatedObject(self, @selector(identify));
 }
 
 - (void)setIdentify:(NSString *)identify {
-    objc_setAssociatedObject(self, &identifyKey, identify, OBJC_ASSOCIATION_COPY_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(identify), identify, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
 @end

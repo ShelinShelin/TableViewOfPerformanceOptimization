@@ -11,6 +11,7 @@
 #import "XLLayout.h"
 #import "XLItem.h"
 #import "UIView+XLAdd.h"
+#import "XLRunloopTaskManager.h"
 
 @interface XLMyCell () {
     BOOL _isDrawing;
@@ -166,8 +167,9 @@
                 UIGraphicsEndImageContext();
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
-                    imageView.image = temp;
-                
+                    [[XLRunloopTaskManager sharedRunLoopTaskManager] addRunloopTask:^{
+                        imageView.image = temp;
+                    }];                
                 });
             });
     }

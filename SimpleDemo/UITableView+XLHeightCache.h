@@ -19,8 +19,6 @@
 - (void)removeAllLayoutCacheOfCell;
 - (void)cacheCellLayout:(XLLayout *)layout forKey:(NSString *)key;
 - (XLLayout *)layoutCellForKey:(NSString *)key;
-
-
 /**
  *  key for caches
  */
@@ -30,7 +28,6 @@
  *  Use to store all the precache layout objects
  */
 @property (nonatomic, strong) NSMutableArray *precacheLayoutArray;
-
 /**
  *  identify for key
  */

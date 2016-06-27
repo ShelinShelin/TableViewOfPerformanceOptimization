@@ -53,11 +53,11 @@
                      onThread:[NSThread mainThread]
                    withObject:manager
                 waitUntilDone:NO
-                        modes:@[NSDefaultRunLoopMode]];
+                        modes:@[NSRunLoopCommonModes]];
 
     });
     
-    CFRunLoopAddObserver(runLoop, defaultModeObserver, kCFRunLoopDefaultMode);
+    CFRunLoopAddObserver(runLoop, defaultModeObserver, kCFRunLoopCommonModes);
     CFRelease(defaultModeObserver);
 }
 

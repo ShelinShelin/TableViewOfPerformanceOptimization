@@ -13,11 +13,15 @@
 
 @implementation XLLayout
 
-static int i = 0;
+- (void)setItem:(XLItem *)item {
+    if (_item == item)return;
+    _item = item;
+    
+    [self layoutCalculate];
+}
 
 - (void)layoutCalculate {
     
-//    NSLog(@"layoutCalculate - %d", i++);
     //iconView layout
     
     _iconLayout = CGRectMake(MARGIN, MARGIN, ICON_SIZE, ICON_SIZE);
@@ -78,7 +82,6 @@ static int i = 0;
     _commentLayout = CGRectMake(spacing * 2 + 30, _toolBarLayout.origin.y, 30, 30);
     
     _likeLayout = CGRectMake(spacing * 3 + 60, _toolBarLayout.origin.y, 30, 30);
-    
 }
 
 - (CGFloat)cellHeight {

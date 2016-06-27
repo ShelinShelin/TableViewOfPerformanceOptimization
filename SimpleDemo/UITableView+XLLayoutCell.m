@@ -8,7 +8,7 @@
 
 #import "UITableView+XLLayoutCell.h"
 #import "XLLayout.h"
-static int k = 0;
+
 @implementation UITableView (XLLayoutCell)
 
 - (XLLayout *)layoutCellWithKey:(NSString *)key indexPath:(NSIndexPath *)indexPath {
@@ -17,7 +17,6 @@ static int k = 0;
     if ([self layoutCellForKey:key].cellHeight) {
         return [self layoutCellForKey:key];
     }
-    NSLog(@"=== %d", k++);
     XLLayout *layout = self.precacheLayoutArray[indexPath.row];
     [layout layoutCalculate];
     [self cacheCellLayout:layout forKey:[self cacheKey:indexPath]];
