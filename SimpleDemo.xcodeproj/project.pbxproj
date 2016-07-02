@@ -13,7 +13,6 @@
 		FD3DBE1E1D1A8D53003F1184 /* UIView+XLAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3DBE1D1D1A8D53003F1184 /* UIView+XLAdd.m */; };
 		FD42731F1D1E144700EB8F46 /* XLRunloopTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD42731E1D1E144700EB8F46 /* XLRunloopTaskManager.m */; };
 		FD4273211D1E2F2E00EB8F46 /* ImageResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FD4273201D1E2F2E00EB8F46 /* ImageResources.bundle */; };
-		FD4273231D1E505100EB8F46 /* bg_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD4273221D1E505100EB8F46 /* bg_image.jpg */; };
 		FD5E119F1D124A8200F04834 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5E119E1D124A8200F04834 /* main.m */; };
 		FD5E11A21D124A8200F04834 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5E11A11D124A8200F04834 /* AppDelegate.m */; };
 		FD5E11A51D124A8200F04834 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5E11A41D124A8200F04834 /* ViewController.m */; };
@@ -31,6 +30,7 @@
 		FD7E64121D1AB60E00DD054A /* feedlist.json in Resources */ = {isa = PBXBuildFile; fileRef = FD7E64111D1AB60E00DD054A /* feedlist.json */; };
 		FD7E64151D1ABCA100DD054A /* NSAttributedString+XLAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = FD7E64141D1ABCA100DD054A /* NSAttributedString+XLAdd.m */; };
 		FD7E64171D1AC43C00DD054A /* shelin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD7E64161D1AC43C00DD054A /* shelin.jpg */; };
+		FDE5372D1D27F4CE0053AB09 /* bg_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FDE5372C1D27F4CE0053AB09 /* bg_image.jpg */; };
 		FDFB61931D1B9055004251B3 /* NSString+XLAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = FDFB61921D1B9055004251B3 /* NSString+XLAdd.m */; };
 /* End PBXBuildFile section */
 
@@ -63,7 +63,6 @@
 		FD42731D1D1E144700EB8F46 /* XLRunloopTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLRunloopTaskManager.h; sourceTree = "<group>"; };
 		FD42731E1D1E144700EB8F46 /* XLRunloopTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLRunloopTaskManager.m; sourceTree = "<group>"; };
 		FD4273201D1E2F2E00EB8F46 /* ImageResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ImageResources.bundle; sourceTree = "<group>"; };
-		FD4273221D1E505100EB8F46 /* bg_image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg_image.jpg; sourceTree = "<group>"; };
 		FD5E119A1D124A8200F04834 /* SimpleDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD5E119E1D124A8200F04834 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FD5E11A01D124A8200F04834 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -96,6 +95,7 @@
 		FD7E64131D1ABCA100DD054A /* NSAttributedString+XLAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+XLAdd.h"; sourceTree = "<group>"; };
 		FD7E64141D1ABCA100DD054A /* NSAttributedString+XLAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+XLAdd.m"; sourceTree = "<group>"; };
 		FD7E64161D1AC43C00DD054A /* shelin.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = shelin.jpg; sourceTree = "<group>"; };
+		FDE5372C1D27F4CE0053AB09 /* bg_image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg_image.jpg; sourceTree = "<group>"; };
 		FDFB61911D1B9055004251B3 /* NSString+XLAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+XLAdd.h"; sourceTree = "<group>"; };
 		FDFB61921D1B9055004251B3 /* NSString+XLAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+XLAdd.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -210,8 +210,8 @@
 			children = (
 				FD4273201D1E2F2E00EB8F46 /* ImageResources.bundle */,
 				FD7E64111D1AB60E00DD054A /* feedlist.json */,
+				FDE5372C1D27F4CE0053AB09 /* bg_image.jpg */,
 				FD7E64161D1AC43C00DD054A /* shelin.jpg */,
-				FD4273221D1E505100EB8F46 /* bg_image.jpg */,
 				FD5E11A31D124A8200F04834 /* ViewController.h */,
 				FD5E11A41D124A8200F04834 /* ViewController.m */,
 				FD5E11A61D124A8200F04834 /* Main.storyboard */,
@@ -346,7 +346,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD7E64121D1AB60E00DD054A /* feedlist.json in Resources */,
-				FD4273231D1E505100EB8F46 /* bg_image.jpg in Resources */,
+				FDE5372D1D27F4CE0053AB09 /* bg_image.jpg in Resources */,
 				FD5E11AD1D124A8200F04834 /* LaunchScreen.storyboard in Resources */,
 				FD5E11AA1D124A8200F04834 /* Assets.xcassets in Resources */,
 				FD7E64171D1AC43C00DD054A /* shelin.jpg in Resources */,

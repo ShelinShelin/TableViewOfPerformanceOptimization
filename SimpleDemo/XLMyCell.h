@@ -7,11 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
-@class XLLayout;
+@class XLLayout, XLMyCell;
+
+@protocol XLCellDelegate <NSObject>
+
+@optional
+
+- (void)cellDidClickAvatar:(XLMyCell *)cell;
+- (void)cellDidClickComment:(XLMyCell *)cell;
+- (void)cellDidClickCompose:(XLMyCell *)cell;
+- (void)cellDidClickLike:(XLMyCell *)cell;
+
+@end
 
 @interface XLMyCell : UITableViewCell
 
 @property (nonatomic, strong) XLLayout *layout;
+
+@property (nonatomic, weak) id delegate;
 
 + (XLMyCell *)myCellWithTableView:(UITableView *)tableView;
 

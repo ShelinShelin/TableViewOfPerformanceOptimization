@@ -20,8 +20,7 @@
 @property (nonatomic, strong) XLLabel *statusLabel;
 @property (nonatomic, strong) UIImageView *postBgView;
 @property (nonatomic, strong) UIButton *avatarView;
-@property (nonatomic, strong) NSMutableArray *imageArray;
-
+@property (nonatomic, strong) NSMutableArray *imageViewArray;
 
 @end
 
@@ -46,6 +45,7 @@
         [self.contentView addSubview:self.postBgView];
         
         self.avatarView = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.avatarView addTarget:self action:@selector(avatarClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.avatarView addCornerMaskLayerWithRadius:ICON_SIZE / 2.0];
         [self.contentView addSubview:self.avatarView];
         
@@ -55,11 +55,12 @@
         
         [self.contentView addSubview:self.statusLabel];
         
-        self.imageArray = [NSMutableArray arrayWithCapacity:9];
-        for (int i = 0; i < 3; i ++) {
+        self.imageViewArray = [NSMutableArray arrayWithCapacity:9];
+        for (int i = 0; i < 9; i ++) {
             UIImageView *imageView = [[UIImageView alloc] init];
+            imageView.hidden = YES;
             imageView.backgroundColor = [UIColor lightGrayColor];
-            [self.imageArray addObject:imageView];
+            [self.imageViewArray addObject:imageView];
             [self.contentView addSubview:imageView];
         }
     }
@@ -80,7 +81,7 @@
     self.avatarView.frame = layout.iconLayout;
     [self.avatarView setImage:[UIImage imageNamed:item.iconName] forState:UIControlStateNormal];
     
-    //label
+    //status label
     self.statusLabel.frame = layout.statusLayout;
     NSMutableAttributedString *muAttrStr = [[NSMutableAttributedString alloc] initWithString:item.status];
     [muAttrStr addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, muAttrStr.length)];
@@ -90,6 +91,8 @@
     [self drawImages];
     [self draw];
 }
+
+#pragma mark - draw image
 
 - (void)draw {
     
@@ -140,13 +143,14 @@
     
     XLItem *item = _layout.item;
     
-    for (int i = 0; i < 3; i ++)  {
-        UIImageView *imageView = self.imageArray[i];
-        imageView.frame = CGRectMake(i * (IMAGE_SIZE + MARGIN) + MARGIN, CGRectGetMaxY(_layout.statusLayout) + MARGIN, IMAGE_SIZE, IMAGE_SIZE);
+    [self clearDraw];
+    
+    for (int i = 0; i < item.images.count; i ++)  {
+        UIImageView *imageView = self.imageViewArray[i];
+        imageView.hidden = NO;
+        imageView.frame = CGRectMake(i % 3 * (IMAGE_SIZE + MARGIN) + MARGIN,  CGRectGetMaxY(_layout.statusLayout) + MARGIN + i / 3 * (IMAGE_SIZE + MARGIN), IMAGE_SIZE, IMAGE_SIZE);
         
-        imageView.image = nil;
-        
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 
                 UIGraphicsBeginImageContextWithOptions(imageView.frame.size, YES, 0);
                 
@@ -175,5 +179,44 @@
     }
 }
 
+- (void)clearDraw {
+    for (UIImageView *imageView in self.imageViewArray) {
+        imageView.hidden = YES;
+        imageView.image = nil;
+    }
+}
+
+#pragma mark - click action
+
+- (void)avatarClick:(UIButton *)button {
+    if ([self.delegate respondsToSelector:@selector(cellDidClickAvatar:)]) {
+        [self.delegate cellDidClickAvatar:self];
+    }
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    
+    NSSet *allTouches = [event allTouches];
+    UITouch *touch = [allTouches anyObject];
+    CGPoint point = [touch locationInView:[touch view]];
+    if (CGRectContainsPoint(self.layout.commentLayout, point)) {
+        if ([self.delegate respondsToSelector:@selector(cellDidClickComment:)]) {
+            [self.delegate cellDidClickComment:self];
+        }
+        return;
+    }
+    if (CGRectContainsPoint(self.layout.composeLayout, point)) {
+        if ([self.delegate respondsToSelector:@selector(cellDidClickCompose:)]) {
+            [self.delegate cellDidClickCompose:self];
+        }
+        return;
+    }
+    if (CGRectContainsPoint(self.layout.likeLayout, point)) {
+        if ([self.delegate respondsToSelector:@selector(cellDidClickLike:)]) {
+            [self.delegate cellDidClickLike:self];
+        }
+        return;
+    }
+}
 
 @end

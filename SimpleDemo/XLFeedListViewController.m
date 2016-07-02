@@ -12,7 +12,7 @@
 #import "XLItem.h"
 #import "XLLayout.h"
 
-@interface XLFeedListViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface XLFeedListViewController () <UITableViewDelegate, UITableViewDataSource, XLCellDelegate>
 
 @property (nonatomic, strong) XLTableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
@@ -68,16 +68,36 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     XLMyCell *cell = [XLMyCell myCellWithTableView:tableView];
+    cell.delegate = self;
     XLLayout *layout = (XLLayout *)self.dataArray[indexPath.row];
-    
     cell.layout = layout;
     return cell;
 }
+
+#pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     XLLayout *layout = (XLLayout *)self.dataArray[indexPath.row];
     return layout.cellHeight;
+}
+
+#pragma mark - XLCellDelegate
+
+- (void)cellDidClickAvatar:(XLMyCell *)cell {
+    NSLog(@"%s", __FUNCTION__);
+}
+
+- (void)cellDidClickComment:(XLMyCell *)cell {
+    NSLog(@"%s", __FUNCTION__);
+}
+
+- (void)cellDidClickCompose:(XLMyCell *)cell {
+    NSLog(@"%s", __FUNCTION__);
+}
+
+- (void)cellDidClickLike:(XLMyCell *)cell {
+    NSLog(@"%s", __FUNCTION__);
 }
 
 #pragma mark - lazy loading
