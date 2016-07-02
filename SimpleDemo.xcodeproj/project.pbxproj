@@ -31,6 +31,7 @@
 		FD7E64151D1ABCA100DD054A /* NSAttributedString+XLAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = FD7E64141D1ABCA100DD054A /* NSAttributedString+XLAdd.m */; };
 		FD7E64171D1AC43C00DD054A /* shelin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD7E64161D1AC43C00DD054A /* shelin.jpg */; };
 		FDE5372D1D27F4CE0053AB09 /* bg_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FDE5372C1D27F4CE0053AB09 /* bg_image.jpg */; };
+		FDE537331D27F82D0053AB09 /* XLExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDE537321D27F82D0053AB09 /* XLExampleViewController.m */; };
 		FDFB61931D1B9055004251B3 /* NSString+XLAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = FDFB61921D1B9055004251B3 /* NSString+XLAdd.m */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +97,8 @@
 		FD7E64141D1ABCA100DD054A /* NSAttributedString+XLAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+XLAdd.m"; sourceTree = "<group>"; };
 		FD7E64161D1AC43C00DD054A /* shelin.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = shelin.jpg; sourceTree = "<group>"; };
 		FDE5372C1D27F4CE0053AB09 /* bg_image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg_image.jpg; sourceTree = "<group>"; };
+		FDE537311D27F82D0053AB09 /* XLExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLExampleViewController.h; sourceTree = "<group>"; };
+		FDE537321D27F82D0053AB09 /* XLExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLExampleViewController.m; sourceTree = "<group>"; };
 		FDFB61911D1B9055004251B3 /* NSString+XLAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+XLAdd.h"; sourceTree = "<group>"; };
 		FDFB61921D1B9055004251B3 /* NSString+XLAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+XLAdd.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -200,6 +203,8 @@
 				FD5E11D41D124B2D00F04834 /* XLExampleList.m */,
 				FD5E11D91D124FF200F04834 /* XLFeedListViewController.h */,
 				FD5E11DA1D124FF200F04834 /* XLFeedListViewController.m */,
+				FDE537311D27F82D0053AB09 /* XLExampleViewController.h */,
+				FDE537321D27F82D0053AB09 /* XLExampleViewController.m */,
 				FD5E119D1D124A8200F04834 /* Supporting Files */,
 			);
 			path = SimpleDemo;
@@ -380,6 +385,7 @@
 				FD5E11DB1D124FF200F04834 /* XLFeedListViewController.m in Sources */,
 				FD5E11D51D124B2D00F04834 /* XLExampleList.m in Sources */,
 				FD7E64101D1AB1B100DD054A /* XLLabel.m in Sources */,
+				FDE537331D27F82D0053AB09 /* XLExampleViewController.m in Sources */,
 				FD7E64151D1ABCA100DD054A /* NSAttributedString+XLAdd.m in Sources */,
 				FD3DBE171D1A8663003F1184 /* XLItem.m in Sources */,
 				FD5E11A21D124A8200F04834 /* AppDelegate.m in Sources */,

@@ -24,8 +24,15 @@
 
 @property (nonatomic, strong) XLLayout *layout;
 
-@property (nonatomic, weak) id delegate;
+@property (nonatomic, weak) id <XLCellDelegate> delegate;
 
 + (XLMyCell *)myCellWithTableView:(UITableView *)tableView;
 
 @end
+
+@interface XLMyCell (XLAdd)
+
+@property (nonatomic, strong) NSIndexPath *indexPath;
+
+@end
+

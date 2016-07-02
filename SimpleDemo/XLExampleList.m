@@ -29,6 +29,7 @@
     [self.view addSubview:self.tableView];
     
     [self addCellItemWithTitle:@"Feed List" className:@"XLFeedListViewController"];
+    [self addCellItemWithTitle:@"Blended Layer" className:@"XLExampleViewController"];
     
 }
 

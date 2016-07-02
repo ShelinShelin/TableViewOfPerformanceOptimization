@@ -12,6 +12,7 @@
 #import "XLItem.h"
 #import "UIView+XLAdd.h"
 #import "XLRunloopTaskManager.h"
+#import <objc/runtime.h>
 
 @interface XLMyCell () {
     BOOL _isDrawing;
@@ -220,3 +221,18 @@
 }
 
 @end
+
+#pragma mark - XLMyCell + XLAdd
+
+@implementation XLMyCell (XLAdd)
+
+- (NSIndexPath *)indexPath {
+    return objc_getAssociatedObject(self, @selector(indexPath));
+}
+
+- (void)setIndexPath:(NSIndexPath *)indexPath {
+    objc_setAssociatedObject(self, @selector(indexPath), indexPath, OBJC_ASSOCIATION_RETAIN);
+}
+
+@end
+

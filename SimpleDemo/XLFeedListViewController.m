@@ -69,6 +69,7 @@
     
     XLMyCell *cell = [XLMyCell myCellWithTableView:tableView];
     cell.delegate = self;
+    cell.indexPath = indexPath;
     XLLayout *layout = (XLLayout *)self.dataArray[indexPath.row];
     cell.layout = layout;
     return cell;
