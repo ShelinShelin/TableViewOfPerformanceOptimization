@@ -23,7 +23,6 @@
 - (void)layoutCalculate {
     
     //iconView layout
-    
     _iconLayout = CGRectMake(MARGIN, MARGIN, ICON_SIZE, ICON_SIZE);
     
     //userName layout
@@ -39,11 +38,8 @@
     _publicTimeLayout = CGRectMake(CGRectGetMaxX(_fromLayout) + MARGIN, _fromLayout.origin.y, publicTimeSize.width, publicTimeSize.height);
     
     //status layout
-    NSMutableAttributedString *muAttrStr = [[NSMutableAttributedString alloc] initWithString:_item.status];
-    [muAttrStr addAttribute:NSForegroundColorAttributeName value:TEXT_COLOR range:NSMakeRange(0, muAttrStr.length)];
-    [muAttrStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14.0f] range:NSMakeRange(0, muAttrStr.length)];
     
-    CGSize textSize = [muAttrStr boundingRectWithMaxWidh:(SCREEN_WIDTH - 2 * MARGIN)];
+    CGSize textSize = [_item.attrStatus boundingRectWithMaxWidh:(SCREEN_WIDTH - 2 * MARGIN)];
     _statusLayout = CGRectMake(MARGIN, CGRectGetMaxY(_iconLayout) + MARGIN, textSize.width, textSize.height);
     
     //images layout

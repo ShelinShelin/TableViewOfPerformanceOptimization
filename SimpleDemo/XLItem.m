@@ -7,12 +7,18 @@
 //
 
 #import "XLItem.h"
+#import "XLLayout.h"
+#import <UIKit/UIKit.h>
 
 @implementation XLItem
 
 - (instancetype)initWithDict:(NSDictionary *)dict {
     if (self = [super init]) {
         [self setValuesForKeysWithDictionary:dict];
+        self.attrStatus = [[NSMutableAttributedString alloc] initWithString:self.status];
+        [self.attrStatus addAttribute:NSForegroundColorAttributeName value:TEXT_COLOR range:NSMakeRange(0, self.attrStatus.length)];
+        [self.attrStatus addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14.0f] range:NSMakeRange(0, self.attrStatus.length)];
+
     }
     return self;
 }

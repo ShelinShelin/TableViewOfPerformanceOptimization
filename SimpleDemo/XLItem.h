@@ -17,6 +17,8 @@
 @property (nonatomic, copy) NSString *publicTime;
 @property (nonatomic, copy) NSString *from;
 
+@property (nonatomic, strong) NSMutableAttributedString *attrStatus;
+
 - (instancetype)initWithDict:(NSDictionary *)dict;
 + (instancetype)itemWithDict:(NSDictionary *)dict;
 

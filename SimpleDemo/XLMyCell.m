@@ -84,10 +84,7 @@
     
     //status label
     self.statusLabel.frame = layout.statusLayout;
-    NSMutableAttributedString *muAttrStr = [[NSMutableAttributedString alloc] initWithString:item.status];
-    [muAttrStr addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, muAttrStr.length)];
-    [muAttrStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14.0f] range:NSMakeRange(0, muAttrStr.length)];
-    self.statusLabel.attrText = muAttrStr;
+    self.statusLabel.attrText = item.attrStatus;
     
     [self drawImages];
     [self draw];
