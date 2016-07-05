@@ -8,32 +8,23 @@
 
 #import "XLLabel.h"
 
-@implementation XLLabel {
-    UIImageView *_bgImageView;
-}
+@implementation XLLabel
 
 - (instancetype)init {
     self = [super init];
     if (self) {
         _textBgColor = [UIColor whiteColor];
-        _bgImageView = [[UIImageView alloc] init];
-        [self addSubview:_bgImageView];
     }
     return self;
 }
 
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    _bgImageView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-}
-
 - (void)setAttrText:(NSAttributedString *)attrText {
     if (attrText == nil || attrText.length<=0 || _attrText == attrText) {
-        _bgImageView.image = nil;
+        self.layer.contents = nil;
         return;
     }
     _attrText = attrText;
-    _bgImageView.image = nil;
+    self.layer.contents = nil;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
@@ -52,8 +43,7 @@
         UIGraphicsEndImageContext();
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            
-            _bgImageView.image = image;
+            self.layer.contents = (__bridge id _Nullable)(image.CGImage);
         });
     });
 }
