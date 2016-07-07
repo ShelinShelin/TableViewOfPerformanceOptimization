@@ -13,10 +13,84 @@
 #import "UIView+XLAdd.h"
 #import "XLRunloopTaskManager.h"
 #import <objc/runtime.h>
+#import "XLDisplayLayer.h"
 
-@interface XLMyCell () {
-    BOOL _isDrawing;
+/**
+ ==========================================================
+ XLImageView
+ ==========================================================
+ */
+
+@interface XLImageView () <XLDisplayLayerDelegate>
+
+
+@end
+
+
+@implementation XLImageView
+
+#pragma mark - need update
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+//    [self needUpdate];
 }
+
++ (Class)layerClass {
+    return [XLDisplayLayer class];
+}
+
+- (void)setImageName:(NSString *)imageName {
+    _imageName = imageName;
+    [self needUpdate];
+}
+
+- (void)needUpdate {
+    [[XLRunloopTaskManager sharedRunLoopTaskManager] addRunloopTask:^{
+        [self.layer setNeedsDisplay];
+    }];
+}
+
+#pragma mark - XLDisplayLayerDelegate
+
+- (void)asyncDisplayWithContext:(CGContextRef)context size:(CGSize)size isCancelled:(BOOL)isCancelled {
+    
+    if (isCancelled) return;
+    
+    CGFloat width = self.frame.size.width;
+    CGFloat height = self.frame.size.height;
+    CGContextFillRect(context, self.frame);
+    CGContextStrokeRect(context, self.frame);
+    
+    if (isCancelled) return;
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:_imageName ofType:nil];
+    UIImage *image = [UIImage imageWithContentsOfFile:filePath];
+    
+    if (isCancelled) return;
+    CGContextRotateCTM(context, M_PI);
+    CGContextScaleCTM(context, -1, 1);
+    CGContextTranslateCTM(context, 0, -height);
+    
+    if (isCancelled) return;
+    CGContextDrawImage(context, CGRectMake(0, 0, width, height), image.CGImage);
+    
+}
+
+- (void)asyncDidDisplayLayer:(CALayer *)layer finished:(BOOL)finished {
+    //finished
+}
+
+
+@end
+
+
+/**
+ ==========================================================
+ XLMyCell
+ ==========================================================
+ */
+
+@interface XLMyCell () <XLDisplayLayerDelegate>
 
 @property (nonatomic, strong) XLLabel *statusLabel;
 @property (nonatomic, strong) UIImageView *postBgView;
@@ -29,15 +103,19 @@
     UIImageView *_imageView;
 }
 
+#pragma mark - public mehted
+
 + (XLMyCell *)myCellWithTableView:(UITableView *)tableView {
-    static NSString *_id = @"XL";
-    XLMyCell *cell = [tableView dequeueReusableCellWithIdentifier:_id];
+    static NSString *identif = @"XLMyCell";
+    XLMyCell *cell = [tableView dequeueReusableCellWithIdentifier:identif];
     if (!cell) {
-        cell = [[XLMyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:_id];
+        cell = [[XLMyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identif];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return cell;
 }
+
+#pragma mark - override
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -58,7 +136,7 @@
         
         self.imageViewArray = [NSMutableArray arrayWithCapacity:9];
         for (int i = 0; i < 9; i ++) {
-            UIImageView *imageView = [[UIImageView alloc] init];
+            XLImageView *imageView = [[XLImageView alloc] init];
             imageView.hidden = YES;
             imageView.backgroundColor = [UIColor lightGrayColor];
             [self.imageViewArray addObject:imageView];
@@ -68,11 +146,19 @@
     return self;
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    [self needUpdate];
+}
+
+#pragma mark - setter
+
 - (void)setLayout:(XLLayout *)layout {
     
     if (_layout == layout) return;
     _layout = layout;
-    
+
+    [self needUpdate];
     XLItem *item = layout.item;
     
     //post bg
@@ -86,101 +172,77 @@
     self.statusLabel.frame = layout.statusLayout;
     self.statusLabel.attrText = item.attrStatus;
     
-    [self drawImages];
-    [self draw];
+    //set images
+    [self setImages];
 }
 
-#pragma mark - draw image
+#pragma mark - need update
 
-- (void)draw {
-    
-    if (_isDrawing) return;
-    
-    self.postBgView.image = nil;
-    
-    XLItem *item = _layout.item;
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        _isDrawing = YES;
-        
-        UIGraphicsBeginImageContextWithOptions(_layout.postBgLayout.size, YES, 0);
-        
-        CGContextRef context = UIGraphicsGetCurrentContext();
-        [BG_COLOR set];
-        CGContextStrokeRect(context, _layout.postBgLayout);
-        CGContextFillRect(context, _layout.postBgLayout);
-        
-        //user name
-        [item.userName drawInRect:_layout.userNameLayout withAttributes:@{NSFontAttributeName : TEXT_FONT}];
-        
-        //from
-        [item.from drawInRect:_layout.fromLayout withAttributes:@{NSFontAttributeName : MID_TEXT_FONT, NSForegroundColorAttributeName : TEXT_COLOR}];
-        
-        //public time
-        [item.publicTime drawInRect:_layout.publicTimeLayout withAttributes:@{NSFontAttributeName : MID_TEXT_FONT, NSForegroundColorAttributeName : TEXT_COLOR}];
-        
-        [[UIImage imageNamed:@"ImageResources.bundle/timeline_icon_retweet"] drawInRect:_layout.composeLayout blendMode:kCGBlendModeNormal alpha:1.0f];
-        
-        [[UIImage imageNamed:@"ImageResources.bundle/timeline_icon_comment"] drawInRect:_layout.commentLayout blendMode:kCGBlendModeNormal alpha:1.0f];
-        
-        [[UIImage imageNamed:@"ImageResources.bundle/timeline_icon_unlike"] drawInRect:_layout.likeLayout blendMode:kCGBlendModeNormal alpha:1.0f];
-        
-        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-        
-        UIGraphicsEndImageContext();
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            self.postBgView.image = image;
-            _isDrawing = NO;
-        });
-    });
++ (Class)layerClass {
+    return [XLDisplayLayer class];
 }
 
-- (void)drawImages {
+- (void)needUpdate {
+    [[XLRunloopTaskManager sharedRunLoopTaskManager] addRunloopTask:^{
+        [self.layer setNeedsDisplay];
+    }];
+}
+
+#pragma mark - XLDisplayLayerDelegate
+
+- (void)asyncDisplayWithContext:(CGContextRef)context size:(CGSize)size isCancelled:(BOOL)isCancelled {
     
+    if (isCancelled) return;
+    self.postBgView.layer.contents = nil;
     XLItem *item = _layout.item;
     
+    [BG_COLOR set];
+    CGContextStrokeRect(context, _layout.postBgLayout);
+    CGContextFillRect(context, _layout.postBgLayout);
+    
+    if (isCancelled) return;
+    //user name
+    [item.userName drawInRect:_layout.userNameLayout withAttributes:@{NSFontAttributeName : TEXT_FONT}];
+    
+    //from
+    [item.from drawInRect:_layout.fromLayout withAttributes:@{NSFontAttributeName : MID_TEXT_FONT, NSForegroundColorAttributeName : TEXT_COLOR}];
+    
+    //public time
+    [item.publicTime drawInRect:_layout.publicTimeLayout withAttributes:@{NSFontAttributeName : MID_TEXT_FONT, NSForegroundColorAttributeName : TEXT_COLOR}];
+    
+    if (isCancelled) return;
+    [[UIImage imageNamed:@"ImageResources.bundle/timeline_icon_retweet"] drawInRect:_layout.composeLayout blendMode:kCGBlendModeNormal alpha:1.0f];
+    
+    [[UIImage imageNamed:@"ImageResources.bundle/timeline_icon_comment"] drawInRect:_layout.commentLayout blendMode:kCGBlendModeNormal alpha:1.0f];
+    
+    [[UIImage imageNamed:@"ImageResources.bundle/timeline_icon_unlike"] drawInRect:_layout.likeLayout blendMode:kCGBlendModeNormal alpha:1.0f];
+
+}
+
+- (void)asyncDidDisplayLayer:(CALayer *)layer finished:(BOOL)finished {
+    if (!finished) return;
+    
+//    self.postBgView.layer.contents = layer.contents;
+}
+
+- (void)setImages {
+    
+    XLItem *item = _layout.item;
     [self clearDraw];
     
     for (int i = 0; i < item.images.count; i ++)  {
-        UIImageView *imageView = self.imageViewArray[i];
-        imageView.hidden = NO;
+        XLImageView *imageView = self.imageViewArray[i];
         imageView.frame = CGRectMake(i % 3 * (IMAGE_SIZE + MARGIN) + MARGIN,  CGRectGetMaxY(_layout.statusLayout) + MARGIN + i / 3 * (IMAGE_SIZE + MARGIN), IMAGE_SIZE, IMAGE_SIZE);
+        imageView.hidden = NO;
+        imageView.imageName = item.images[i];
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                
-                UIGraphicsBeginImageContextWithOptions(imageView.frame.size, YES, 0);
-                
-                CGContextRef context = UIGraphicsGetCurrentContext();
-                CGContextFillRect(context, imageView.frame);
-                CGContextStrokeRect(context, imageView.frame);
-                
-                NSString *filePath = [[NSBundle mainBundle] pathForResource:item.images[i] ofType:nil];
-                UIImage *image = [UIImage imageWithContentsOfFile:filePath];
-                
-                CGContextRotateCTM(context, M_PI);
-                CGContextScaleCTM(context, -1, 1);
-                CGContextTranslateCTM(context, 0, -imageView.frame.size.height);
-                CGContextDrawImage(context, CGRectMake(0, 0, imageView.frame.size.width, imageView.frame.size.height), image.CGImage);
-                
-                UIImage *temp = UIGraphicsGetImageFromCurrentImageContext();
-                
-                UIGraphicsEndImageContext();
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    [[XLRunloopTaskManager sharedRunLoopTaskManager] addRunloopTask:^{
-                        imageView.image = temp;
-                    }];                
-                });
-            });
     }
 }
 
 - (void)clearDraw {
-    for (UIImageView *imageView in self.imageViewArray) {
+    for (XLImageView *imageView in self.imageViewArray) {
         imageView.hidden = YES;
-        imageView.image = nil;
+        imageView.layer.contents = nil;
     }
 }
 
@@ -218,6 +280,13 @@
 }
 
 @end
+
+
+/**
+ ==========================================================
+ XLMyCell + XLAdd
+ ==========================================================
+ */
 
 #pragma mark - XLMyCell + XLAdd
 

@@ -14,7 +14,8 @@
 @required
 - (void)asyncDisplayWithContext:(CGContextRef)context size:(CGSize)size isCancelled:(BOOL)isCancelled;
 
-- (void)asyncDidFinishedDisplayLayer:(CALayer *)layer finished:(BOOL)finished;
+@optional
+- (void)asyncDidDisplayLayer:(CALayer *)layer finished:(BOOL)finished;
 
 @end
 

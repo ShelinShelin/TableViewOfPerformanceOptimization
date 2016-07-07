@@ -20,6 +20,14 @@
 
 @end
 
+
+@interface XLImageView : UIView
+
+@property (nonatomic, copy) NSString *imageName;
+
+@end
+
+
 @interface XLMyCell : UITableViewCell
 
 @property (nonatomic, strong) XLLayout *layout;

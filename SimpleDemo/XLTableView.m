@@ -8,7 +8,6 @@
 
 #import "XLTableView.h"
 #import "XLLayout.h"
-#import "UITableView+XLHeightCache.h"
 
 @interface XLTableView ()
 

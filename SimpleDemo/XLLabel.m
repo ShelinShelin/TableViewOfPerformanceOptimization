@@ -7,6 +7,12 @@
 //
 
 #import "XLLabel.h"
+#import "XLDisplayLayer.h"
+#import "XLRunloopTaskManager.h"
+
+@interface XLLabel () <XLDisplayLayerDelegate>
+
+@end
 
 @implementation XLLabel
 
@@ -18,36 +24,48 @@
     return self;
 }
 
+#pragma mark - need update
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    [self needUpdate];
+}
+
++ (Class)layerClass {
+    return [XLDisplayLayer class];
+}
+
 - (void)setAttrText:(NSAttributedString *)attrText {
     if (attrText == nil || attrText.length<=0 || _attrText == attrText) {
         self.layer.contents = nil;
         return;
     }
     _attrText = attrText;
-    self.layer.contents = nil;
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        UIGraphicsBeginImageContextWithOptions(self.frame.size, YES, 0);
-        
-        CGContextRef context = UIGraphicsGetCurrentContext();
-        [_textBgColor set];
-        
-        CGContextStrokeRect(context, self.bounds);
-        CGContextFillRect(context, self.bounds);
-        
-        [attrText drawInRect:self.bounds];
-        
-        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-        
-        UIGraphicsEndImageContext();
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.layer.contents = (__bridge id _Nullable)(image.CGImage);
-        });
-    });
+    [self needUpdate];
 }
 
+- (void)needUpdate {
+    [[XLRunloopTaskManager sharedRunLoopTaskManager] addRunloopTask:^{
+        [self.layer setNeedsDisplay];
+    }];
+}
 
+#pragma mark - XLDisplayLayerDelegate
+
+- (void)asyncDisplayWithContext:(CGContextRef)context size:(CGSize)size isCancelled:(BOOL)isCancelled {
+    if (isCancelled) return;
+    
+    [_textBgColor set];
+    CGContextStrokeRect(context, self.bounds);
+    CGContextFillRect(context, self.bounds);
+    
+    if (isCancelled) return;
+    [_attrText drawInRect:self.bounds];
+}
+
+- (void)asyncDidDisplayLayer:(CALayer *)layer finished:(BOOL)finished {
+    
+    //finished
+}
 
 @end

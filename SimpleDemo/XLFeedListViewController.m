@@ -11,6 +11,7 @@
 #import "XLMyCell.h"
 #import "XLItem.h"
 #import "XLLayout.h"
+#import "XLRunloopTaskManager.h"
 
 @interface XLFeedListViewController () <UITableViewDelegate, UITableViewDataSource, XLCellDelegate>
 
@@ -53,6 +54,12 @@
             [self.tableView reloadData];
         });
     });
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [[XLRunloopTaskManager sharedRunLoopTaskManager] removeAllRunloopTask];
 }
 
 #pragma mark - UITableViewDataSource

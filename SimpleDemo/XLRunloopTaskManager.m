@@ -67,7 +67,9 @@
 + (void)defaultModeRunLoopCallBack:(XLRunloopTaskManager *)manager {
     
     XLRunloopTask runloopTask = manager.runloopTaskArray.firstObject;
-    runloopTask();
+    if (runloopTask) {
+        runloopTask();
+    }
     @synchronized (self) {
         [manager.runloopTaskArray removeObjectAtIndex:0];
     }
