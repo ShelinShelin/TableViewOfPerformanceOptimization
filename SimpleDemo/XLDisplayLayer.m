@@ -8,6 +8,37 @@
 
 #import "XLDisplayLayer.h"
 
+#define MAX_QUEUE_COUNT 16
+
+static void dispatch_async_queue_limit(dispatch_queue_t queue, dispatch_block_t block) {
+    
+    static dispatch_semaphore_t seaphore;
+    static dispatch_queue_t q;
+    static int maxQueueCount;
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        // active cpu count
+        maxQueueCount = (int)[NSProcessInfo processInfo].activeProcessorCount;
+        maxQueueCount = maxQueueCount < 1 ? 1 : (maxQueueCount > MAX_QUEUE_COUNT ? MAX_QUEUE_COUNT : maxQueueCount);
+        seaphore = dispatch_semaphore_create(maxQueueCount);
+        q = dispatch_queue_create("xl_display_layer", DISPATCH_QUEUE_CONCURRENT);
+    });
+    
+    dispatch_async(q, ^{
+        
+        // Wait until the semaphore is not zero
+        dispatch_semaphore_wait(seaphore, DISPATCH_TIME_FOREVER);
+        dispatch_async(queue, ^{
+            
+            if (block) {
+                block();
+            }
+            // After the execution semaphore plus one again
+            dispatch_semaphore_signal(seaphore);
+        });
+    });
+}
 
 @implementation XLDisplayLayer {
     BOOL _isCancelled;
@@ -54,8 +85,9 @@
     CGSize size = self.bounds.size;
     CGFloat scale = self.contentsScale;
     CGColorRef backgroundColor = (opaque && self.backgroundColor) ? CGColorRetain(self.backgroundColor) : NULL;
-
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+    
+      dispatch_async_queue_limit(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
         if (_isCancelled) {
             CGColorRelease(backgroundColor);
             return;
