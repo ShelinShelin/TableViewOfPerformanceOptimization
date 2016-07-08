@@ -33,7 +33,7 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-//    [self needUpdate];
+    [self needUpdate];
 }
 
 + (Class)layerClass {
@@ -65,8 +65,6 @@
     if (isCancelled) return;
     NSString *filePath = [[NSBundle mainBundle] pathForResource:_imageName ofType:nil];
     UIImage *image = [UIImage imageWithContentsOfFile:filePath];
-    
-    if (isCancelled) return;
     CGContextRotateCTM(context, M_PI);
     CGContextScaleCTM(context, -1, 1);
     CGContextTranslateCTM(context, 0, -height);

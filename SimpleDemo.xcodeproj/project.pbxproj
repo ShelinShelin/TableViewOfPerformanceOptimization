@@ -30,7 +30,7 @@
 		FD7E64121D1AB60E00DD054A /* feedlist.json in Resources */ = {isa = PBXBuildFile; fileRef = FD7E64111D1AB60E00DD054A /* feedlist.json */; };
 		FD7E64151D1ABCA100DD054A /* NSAttributedString+XLAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = FD7E64141D1ABCA100DD054A /* NSAttributedString+XLAdd.m */; };
 		FD7E64171D1AC43C00DD054A /* shelin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD7E64161D1AC43C00DD054A /* shelin.jpg */; };
-		FDE5372D1D27F4CE0053AB09 /* bg_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FDE5372C1D27F4CE0053AB09 /* bg_image.jpg */; };
+		FDAA8AB51D2F7C0800583330 /* bg_image.png in Resources */ = {isa = PBXBuildFile; fileRef = FDAA8AB41D2F7C0800583330 /* bg_image.png */; };
 		FDE537331D27F82D0053AB09 /* XLExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDE537321D27F82D0053AB09 /* XLExampleViewController.m */; };
 		FDFB61931D1B9055004251B3 /* NSString+XLAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = FDFB61921D1B9055004251B3 /* NSString+XLAdd.m */; };
 		FDFD31AB1D2D148B00FE3B9E /* XLDisplayLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FDFD31AA1D2D148B00FE3B9E /* XLDisplayLayer.m */; };
@@ -97,7 +97,7 @@
 		FD7E64131D1ABCA100DD054A /* NSAttributedString+XLAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+XLAdd.h"; sourceTree = "<group>"; };
 		FD7E64141D1ABCA100DD054A /* NSAttributedString+XLAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+XLAdd.m"; sourceTree = "<group>"; };
 		FD7E64161D1AC43C00DD054A /* shelin.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = shelin.jpg; sourceTree = "<group>"; };
-		FDE5372C1D27F4CE0053AB09 /* bg_image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg_image.jpg; sourceTree = "<group>"; };
+		FDAA8AB41D2F7C0800583330 /* bg_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_image.png; sourceTree = "<group>"; };
 		FDE537311D27F82D0053AB09 /* XLExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLExampleViewController.h; sourceTree = "<group>"; };
 		FDE537321D27F82D0053AB09 /* XLExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLExampleViewController.m; sourceTree = "<group>"; };
 		FDFB61911D1B9055004251B3 /* NSString+XLAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+XLAdd.h"; sourceTree = "<group>"; };
@@ -220,8 +220,8 @@
 			children = (
 				FD4273201D1E2F2E00EB8F46 /* ImageResources.bundle */,
 				FD7E64111D1AB60E00DD054A /* feedlist.json */,
-				FDE5372C1D27F4CE0053AB09 /* bg_image.jpg */,
 				FD7E64161D1AC43C00DD054A /* shelin.jpg */,
+				FDAA8AB41D2F7C0800583330 /* bg_image.png */,
 				FD5E11A31D124A8200F04834 /* ViewController.h */,
 				FD5E11A41D124A8200F04834 /* ViewController.m */,
 				FD5E11A61D124A8200F04834 /* Main.storyboard */,
@@ -356,7 +356,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD7E64121D1AB60E00DD054A /* feedlist.json in Resources */,
-				FDE5372D1D27F4CE0053AB09 /* bg_image.jpg in Resources */,
+				FDAA8AB51D2F7C0800583330 /* bg_image.png in Resources */,
 				FD5E11AD1D124A8200F04834 /* LaunchScreen.storyboard in Resources */,
 				FD5E11AA1D124A8200F04834 /* Assets.xcassets in Resources */,
 				FD7E64171D1AC43C00DD054A /* shelin.jpg in Resources */,
@@ -547,6 +547,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SimpleDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.shelin.SimpleDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -561,6 +562,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SimpleDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.shelin.SimpleDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
