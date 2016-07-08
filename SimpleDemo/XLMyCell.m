@@ -221,8 +221,7 @@
 
 - (void)asyncDidDisplayLayer:(CALayer *)layer finished:(BOOL)finished {
     if (!finished) return;
-    
-//    self.postBgView.layer.contents = layer.contents;
+    self.postBgView.layer.contents = layer.contents;
 }
 
 - (void)setImages {
@@ -235,7 +234,6 @@
         imageView.frame = CGRectMake(i % 3 * (IMAGE_SIZE + MARGIN) + MARGIN,  CGRectGetMaxY(_layout.statusLayout) + MARGIN + i / 3 * (IMAGE_SIZE + MARGIN), IMAGE_SIZE, IMAGE_SIZE);
         imageView.hidden = NO;
         imageView.imageName = item.images[i];
-        
     }
 }
 

@@ -14,14 +14,10 @@ static void dispatch_async_queue_limit(dispatch_queue_t queue, dispatch_block_t 
     
     static dispatch_semaphore_t seaphore;
     static dispatch_queue_t q;
-    static int maxQueueCount;
     static dispatch_once_t onceToken;
     
     dispatch_once(&onceToken, ^{
-        // active cpu count
-        maxQueueCount = (int)[NSProcessInfo processInfo].activeProcessorCount;
-        maxQueueCount = maxQueueCount < 1 ? 1 : (maxQueueCount > MAX_QUEUE_COUNT ? MAX_QUEUE_COUNT : maxQueueCount);
-        seaphore = dispatch_semaphore_create(maxQueueCount);
+        seaphore = dispatch_semaphore_create(MAX_QUEUE_COUNT);
         q = dispatch_queue_create("xl_display_layer", DISPATCH_QUEUE_CONCURRENT);
     });
     
