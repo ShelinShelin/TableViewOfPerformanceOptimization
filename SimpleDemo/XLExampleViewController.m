@@ -14,7 +14,7 @@
     [super viewDidLoad];
     
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"bg_image.jpg" ofType:nil];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"bg_image.png" ofType:nil];
     UIImage *image = [UIImage imageWithContentsOfFile:filePath];
     imageView.image = image;
     [self.view addSubview:imageView];
